@@ -1,0 +1,86 @@
+﻿@model AdmissionPortalCreator.ViewModel.CreateUserViewModel
+<div class="container mt-4">
+    <h2>
+        @(Model.Mode == "Create" ? "Add New User" :
+                Model.Mode == "EditPassword" ? "Change Password" :
+                "Delete User")
+    </h2>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <form asp-action="@(Model.Mode == "Create" ? "Create" : Model.Mode == "Delete" ? "Delete" : "Edit")" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Mode" />
+
+        <!-- Email -->
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" readonly="@(Model.Mode != "Create")" />
+            @if (Model.Mode != "Delete")
+            {
+                <span asp-validation-for="Email" class="text-danger"></span>
+            }
+        </div>
+
+        <!-- Full Name -->
+        <div class="mb-3">
+            <label asp-for="FullName" class="form-label"></label>
+            <input asp-for="FullName" class="form-control" readonly="@(Model.Mode != "Create")" />
+            @if (Model.Mode != "Delete")
+            {
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            }
+        </div>
+
+        <!-- Password - Only show for Create and EditPassword -->
+        @if (Model.Mode == "Create" || Model.Mode == "EditPassword")
+        {
+            <div class="mb-3">
+                <label class="form-label">
+                    @(Model.Mode == "Create" ? "Password" : "New Password")
+                </label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        }
+
+        <!-- Role -->
+        <div class="mb-3">
+            <label asp-for="SelectedRole" class="form-label"></label>
+            @if (Model.Mode == "Create")
+            {
+                <select asp-for="SelectedRole" class="form-select"
+                        asp-items="@(new SelectList(Model.AvailableRoles))">
+                    <option value="">-- Select Role --</option>
+                </select>
+            }
+            else
+            {
+                <!-- Readonly role display -->
+                <input class="form-control" value="@Model.SelectedRole" readonly />
+                <input type="hidden" asp-for="SelectedRole" />
+            }
+            @if (Model.Mode != "Delete")
+            {
+                <span asp-validation-for="SelectedRole" class="text-danger"></span>
+            }
+        </div>
+
+        <!-- Buttons -->
+        @if (Model.Mode == "Create")
+        {
+            <button type="submit" class="btn btn-primary">Create</button>
+        }
+        else if (Model.Mode == "EditPassword")
+        {
+            <button type="submit" class="btn btn-primary">Update Password</button>
+        }
+        else if (Model.Mode == "Delete")
+        {
+            <div class="alert alert-danger">This will permanently delete the user.</div>
+            <button type="submit" class="btn btn-danger">Delete User</button>
+        }
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

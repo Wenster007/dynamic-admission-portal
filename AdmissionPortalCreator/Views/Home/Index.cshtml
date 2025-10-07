@@ -1,0 +1,107 @@
+﻿@model AdmissionPortalCreator.ViewModel.DashboardViewModel
+
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3 col-lg-2 bg-light border-end vh-100 p-3">
+            <h4 class="mb-4">Portal</h4>
+            <ul class="nav flex-column nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" id="openAdmissions-tab" data-bs-toggle="pill" href="#openAdmissions">Open Admissions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="users-tab" data-bs-toggle="pill" href="#users">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="settings-tab" data-bs-toggle="pill" href="#settings">Settings</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9 col-lg-10 p-4">
+            <div class="tab-content">
+
+                <!-- 🔹 Open Admissions -->
+                <div class="tab-pane fade show active" id="openAdmissions">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h3>Open Admissions</h3>
+                        <a asp-controller="Form" asp-action="CreateEdit" class="btn btn-primary">+ Add New</a>
+                    </div>
+
+                    <!-- Example table for admissions -->
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Form Name</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @* Loop admissions from your model *@
+                            <tr>
+                                <td>Fall 2025 Admissions</td>
+                                <td>01 Aug 2025</td>
+                                <td>30 Sep 2025</td>
+                                <td>
+                                    <a asp-controller="Admissions" asp-action="Edit" asp-route-id="1" class="btn btn-sm btn-warning">Edit</a>
+                                    <a asp-controller="Admissions" asp-action="Delete" asp-route-id="1" class="btn btn-sm btn-danger">Delete</a>
+                                    <a asp-controller="Admissions" asp-action="AppliedStudents" asp-route-id="1" class="btn btn-sm btn-info">View Students</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 🔹 Users -->
+                <div class="tab-pane fade" id="users">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h3>Users</h3>
+                        <a asp-controller="Users" asp-action="Create" class="btn btn-success">+ Add User</a>
+                    </div>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var u in Model.Users)
+                            {
+                                <tr>
+                                    <td>@u.Email</td>
+                                    <td>@u.Role</td>
+                                    <td>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <a asp-controller="Users" asp-action="Edit" asp-route-id="@u.Id" asp-route-mode="EditPassword" class="btn btn-warning">Change Password</a>
+                                            <a asp-controller="Users" asp-action="Delete" asp-route-id="@u.Id" asp-route-mode="Delete" class="btn btn-danger">Delete</a>
+                                        }
+                                        else if (User.Identity.Name == u.Email)
+                                        {
+                                            <a asp-controller="Users" asp-action="Edit" asp-route-id="@u.Id" asp-route-mode="EditPassword" class="btn btn-warning">Change Password</a>
+                                        }
+                                </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 🔹 Settings -->
+                <div class="tab-pane fade" id="settings">
+                    <h3>Settings</h3>
+                    <p>General configuration will go here...</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

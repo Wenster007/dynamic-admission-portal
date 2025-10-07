@@ -1,0 +1,30 @@
+﻿@model AdmissionPortalCreator.Models.LoginViewModel
+
+<div class="d-flex justify-content-center align-items-center" style="min-height:70vh;">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px; border-radius: 12px;">
+        <h4 class="text-center mb-4">Login</h4>
+
+        <form asp-action="Login" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                <input asp-for="Password" class="form-control" type="password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+
+        <div class="text-center mt-3">
+            Don’t have an account?
+            <a asp-action="Register" asp-controller="Account">Sign up now</a>
+        </div>
+    </div>
+</div>

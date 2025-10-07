@@ -1,0 +1,463 @@
+﻿@model AdmissionPortalCreator.ViewModel.FormCreationViewModel
+
+@{
+    ViewData["Title"] = Model.FormId == 0 ? "Create Admission Form" : "Edit Admission Form";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form id="admission-form" asp-action="CreateEdit" asp-controller="Form" method="post">
+    <input type="hidden" asp-for="FormId" />
+
+    <!-- Form Basic Info -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5>Form Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Name" class="form-label fw-bold">Form Name *</label>
+                    <input asp-for="Name" class="form-control" placeholder="e.g. Fall 2025 Admission" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Description" class="form-label fw-bold">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="3" placeholder="Form description"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="StartDate" class="form-label fw-bold">Start Date *</label>
+                    <input asp-for="StartDate" type="datetime-local" class="form-control" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="EndDate" class="form-label fw-bold">End Date *</label>
+                    <input asp-for="EndDate" type="datetime-local" class="form-control" required />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sections Container -->
+    <div class="d-flex justify-content-end mb-3">
+        <button type="button" id="add-section" class="btn btn-outline-primary">+ Add Section</button>
+    </div>
+
+    <div id="sections-container">
+        <!-- Sections will appear here -->
+    </div>
+
+    <br />
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-success">Save Form</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Containers
+        const sectionsContainer = document.getElementById("sections-container");
+        const form = document.getElementById("admission-form");
+
+        // Global field editor references (only one editor reused)
+        let currentSection = null;
+        let editMode = false;
+        let editingField = null;
+
+        // ---------------------------
+        // SECTION CREATION
+        // ---------------------------
+        function createSection(title, sectionId = 0, orderIndex = 0) {
+            const section = document.createElement("div");
+            section.classList.add("section", "mb-4", "border", "p-3", "rounded");
+            section.dataset.title = title;
+            section.dataset.sectionId = sectionId;
+            section.dataset.orderIndex = orderIndex;
+
+            section.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="fw-bold">${title}</h4>
+                    <div>
+                        <button type="button" class="btn btn-sm btn-outline-success add-field">+ Add Field</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-section">❌ Remove Section</button>
+                    </div>
+                </div>
+                <div class="section-fields border p-3 rounded bg-light">
+                    <p class="text-muted mb-0">No fields added yet.</p>
+                </div>
+            `;
+
+            sectionsContainer.appendChild(section);
+            return section;
+        }
+
+        // ---------------------------
+        // FIELD EDITOR MODAL (inline)
+        // ---------------------------
+        function openFieldEditor(section, fieldToEdit = null) {
+            // Remove any existing editor
+            const existingEditor = document.getElementById("field-editor");
+            if (existingEditor) existingEditor.remove();
+
+            currentSection = section;
+            editingField = fieldToEdit;
+            editMode = !!fieldToEdit;
+
+            // Create editor panel
+            const editor = document.createElement("div");
+            editor.id = "field-editor";
+            editor.classList.add("border", "p-3", "rounded", "mb-3", "bg-white");
+            editor.innerHTML = `
+                <h5>${editMode ? "Edit Field" : "Add New Field"}</h5>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Field Label</label>
+                    <input type="text" id="field-label" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Field Type</label>
+                    <select id="field-type" class="form-select">
+                        <option value="text">Text</option>
+                        <option value="email">Email</option>
+                        <option value="number">Number</option>
+                        <option value="date">Date</option>
+                        <option value="dropdown">Dropdown</option>
+                        <option value="yesno">Yes/No</option>
+                        <option value="file">File</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">
+                        <input type="checkbox" id="field-required" /> Required Field
+                    </label>
+                </div>
+                <div id="dropdown-options" class="mb-3 d-none">
+                    <label class="form-label fw-bold">Dropdown Options</label>
+                    <ul id="options-list" class="list-unstyled mb-2"></ul>
+                    <button type="button" id="add-option" class="btn btn-sm btn-outline-primary">+ Add Option</button>
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="button" id="cancel-field" class="btn btn-secondary">Cancel</button>
+                    <button type="button" id="save-field" class="btn btn-success">Save Field</button>
+                </div>
+            `;
+
+            section.prepend(editor);
+
+            const labelInput = editor.querySelector("#field-label");
+            const typeSelect = editor.querySelector("#field-type");
+            const requiredCheckbox = editor.querySelector("#field-required");
+            const dropdownSection = editor.querySelector("#dropdown-options");
+            const optionsList = editor.querySelector("#options-list");
+            const addOptionBtn = editor.querySelector("#add-option");
+            const cancelBtn = editor.querySelector("#cancel-field");
+            const saveBtn = editor.querySelector("#save-field");
+
+            // If editing existing field → load its data
+            if (editMode && editingField) {
+                const data = editingField.dataset;
+                labelInput.value = data.label;
+                typeSelect.value = data.type;
+                requiredCheckbox.checked = data.required === "true";
+
+                if (data.type === "dropdown") {
+                    dropdownSection.classList.remove("d-none");
+                    const options = JSON.parse(data.options || "[]");
+                    options.forEach(o => {
+                        const li = document.createElement("li");
+                        li.classList.add("d-flex", "justify-content-between", "align-items-center", "mb-1");
+                        li.innerHTML = `<span>${o}</span>
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-option">x</button>`;
+                        optionsList.appendChild(li);
+                    });
+                }
+            }
+
+            // Handle type change
+            typeSelect.addEventListener("change", () => {
+                dropdownSection.classList.toggle("d-none", typeSelect.value !== "dropdown");
+            });
+
+            // Add dropdown option
+            addOptionBtn.addEventListener("click", () => {
+                const option = prompt("Enter dropdown option:");
+                if (option && option.trim() !== "") {
+                    const li = document.createElement("li");
+                    li.classList.add("d-flex", "justify-content-between", "align-items-center", "mb-1");
+                    li.innerHTML = `<span>${option}</span>
+                        <button type="button" class="btn btn-sm btn-outline-danger remove-option">x</button>`;
+                    optionsList.appendChild(li);
+                }
+            });
+
+            // Remove option
+            optionsList.addEventListener("click", e => {
+                if (e.target.classList.contains("remove-option")) e.target.closest("li").remove();
+            });
+
+            // Cancel
+            cancelBtn.addEventListener("click", () => editor.remove());
+
+            // Save
+            saveBtn.addEventListener("click", () => {
+                const label = labelInput.value.trim();
+                const type = typeSelect.value;
+                const required = requiredCheckbox.checked;
+                if (!label) return alert("Please enter field label.");
+                const options = [...optionsList.querySelectorAll("span")].map(o => o.innerText);
+
+                const fieldHTML = getFieldPreviewHTML(label, type, options, required);
+
+                if (editMode && editingField) {
+                    // Update existing
+                    editingField.dataset.label = label;
+                    editingField.dataset.type = type;
+                    editingField.dataset.required = required;
+                    editingField.dataset.options = JSON.stringify(options);
+                    editingField.querySelector("label").innerHTML = label + (required ? ' <span class="text-danger">*</span>' : '');
+                    editingField.querySelector(".preview").innerHTML = fieldHTML;
+                    editingField.querySelector(".options-display").innerHTML = optionsDisplayHTML(options, type);
+                } else {
+                    // Create new field
+                    const fieldDiv = document.createElement("div");
+                    fieldDiv.classList.add("field-group", "border", "rounded", "p-2", "mb-2", "position-relative", "bg-white");
+                    fieldDiv.dataset.fieldId = "0";
+                    fieldDiv.dataset.label = label;
+                    fieldDiv.dataset.type = type;
+                    fieldDiv.dataset.required = required;
+                    fieldDiv.dataset.options = JSON.stringify(options);
+                    fieldDiv.innerHTML = `
+                        <label class="fw-bold">${label}${required ? ' <span class="text-danger">*</span>' : ''}</label>
+                        <div class="preview mb-2">${fieldHTML}</div>
+                        <div class="options-display">${optionsDisplayHTML(options, type)}</div>
+                        <div class="position-absolute top-0 end-0 m-1">
+                            <button type="button" class="btn btn-sm btn-outline-warning edit-field">✏️</button>
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-field">❌</button>
+                        </div>
+                    `;
+
+                    const sectionFields = section.querySelector(".section-fields");
+                    const emptyMsg = sectionFields.querySelector("p");
+                    if (emptyMsg) emptyMsg.remove();
+                    sectionFields.appendChild(fieldDiv);
+                }
+
+                editor.remove();
+            });
+        }
+
+        // ---------------------------
+        // HELPERS
+        // ---------------------------
+        function getFieldPreviewHTML(label, type, options, required) {
+            const req = required ? 'required' : '';
+            switch (type) {
+                case "text":
+                case "email":
+                case "number":
+                case "date":
+                    return `<input type="${type}" class="form-control" placeholder="${label}" disabled />`;
+                case "dropdown":
+                    return `<select class="form-control" disabled>
+                        ${options.map(o => `<option>${o}</option>`).join("")}
+                    </select>`;
+                case "yesno":
+                    return `
+                        <div class="form-check form-check-inline">
+                            <input type="radio" disabled class="form-check-input" id="${label}-yes" name="${label}" />
+                            <label class="form-check-label" for="${label}-yes">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" disabled class="form-check-input" id="${label}-no" name="${label}" />
+                            <label class="form-check-label" for="${label}-no">No</label>
+                        </div>`;
+                case "file":
+                    return `<input type="file" class="form-control" disabled />`;
+                default:
+                    return `<input type="text" class="form-control" placeholder="${label}" disabled />`;
+            }
+        }
+
+        function optionsDisplayHTML(options, type) {
+            if (type === "dropdown" && options.length > 0) {
+                return `
+                    <ul class="list-unstyled ms-3">
+                        ${options.map(o => `<li>• ${o}</li>`).join("")}
+                    </ul>`;
+            }
+            return "";
+        }
+
+        // ---------------------------
+        // EVENT HANDLERS
+        // ---------------------------
+        sectionsContainer.addEventListener("click", e => {
+            const section = e.target.closest(".section");
+            if (!section) return;
+
+            // Add field
+            if (e.target.classList.contains("add-field")) {
+                openFieldEditor(section);
+            }
+
+            // Remove section
+            if (e.target.classList.contains("remove-section")) {
+                section.remove();
+                if (sectionsContainer.children.length === 0) {
+                    alert("All sections removed. Add a new one to continue.");
+                }
+            }
+
+            // Edit field
+            if (e.target.classList.contains("edit-field")) {
+                const field = e.target.closest(".field-group");
+                openFieldEditor(section, field);
+            }
+
+            // Remove field
+            if (e.target.classList.contains("remove-field")) {
+                const field = e.target.closest(".field-group");
+                field.remove();
+
+                const fieldsDiv = section.querySelector(".section-fields");
+                if (fieldsDiv.children.length === 0) {
+                    fieldsDiv.innerHTML = `<p class="text-muted mb-0">No fields added yet.</p>`;
+                }
+            }
+        });
+
+        // Add new section
+        document.getElementById("add-section").addEventListener("click", () => {
+            const name = prompt("Enter section name:");
+            if (!name || name.trim() === "") return;
+            const orderIndex = sectionsContainer.children.length;
+            createSection(name.trim(), 0, orderIndex);
+        });
+
+        // ---------------------------
+        // FORM SUBMISSION - Convert to JSON
+        // ---------------------------
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            // Collect all sections
+            const sections = [];
+            const sectionElements = sectionsContainer.querySelectorAll(".section");
+
+            sectionElements.forEach((sectionEl, sectionIndex) => {
+                const fields = [];
+                const fieldElements = sectionEl.querySelectorAll(".field-group");
+
+                fieldElements.forEach((fieldEl, fieldIndex) => {
+                    const options = JSON.parse(fieldEl.dataset.options || "[]");
+                    fields.push({
+                        FieldId: parseInt(fieldEl.dataset.fieldId) || 0,
+                        Label: fieldEl.dataset.label,
+                        FieldType: fieldEl.dataset.type,
+                        IsRequired: fieldEl.dataset.required === "true",
+                        OrderIndex: fieldIndex,
+                        Options: options
+                    });
+                });
+
+                sections.push({
+                    SectionId: parseInt(sectionEl.dataset.sectionId) || 0,
+                    Title: sectionEl.dataset.title,
+                    Description: "",
+                    OrderIndex: sectionIndex,
+                    Fields: fields
+                });
+            });
+
+            // Create hidden input with JSON data
+            const existingInput = document.getElementById("sections-data");
+            if (existingInput) existingInput.remove();
+
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.id = "sections-data";
+            input.name = "SectionsJson";
+            input.value = JSON.stringify(sections);
+            form.appendChild(input);
+
+            // Submit form
+            form.submit();
+        });
+
+        // ---------------------------
+        // LOAD EXISTING DATA (for edit mode)
+        // ---------------------------
+        @if (Model.Sections != null && Model.Sections.Any())
+        {
+                <text>
+                // Load existing sections and fields
+                const existingData = @Html.Raw(Json.Serialize(Model.Sections));
+
+                existingData.forEach((section, sectionIndex) => {
+                    const sectionEl = createSection(section.title, section.sectionId, section.orderIndex);
+                    const sectionFields = sectionEl.querySelector(".section-fields");
+                    sectionFields.innerHTML = "";
+
+                    section.fields.forEach((field, fieldIndex) => {
+                        const fieldDiv = document.createElement("div");
+                        fieldDiv.classList.add("field-group", "border", "rounded", "p-2", "mb-2", "position-relative", "bg-white");
+                        fieldDiv.dataset.fieldId = field.fieldId;
+                        fieldDiv.dataset.label = field.label;
+                        fieldDiv.dataset.type = field.fieldType;
+                        fieldDiv.dataset.required = field.isRequired;
+                        fieldDiv.dataset.options = JSON.stringify(field.options || []);
+
+                        fieldDiv.innerHTML = `
+                            <label class="fw-bold">${field.label}${field.isRequired ? ' <span class="text-danger">*</span>' : ''}</label>
+                            <div class="preview mb-2">${getFieldPreviewHTML(field.label, field.fieldType, field.options || [], field.isRequired)}</div>
+                            <div class="options-display">${optionsDisplayHTML(field.options || [], field.fieldType)}</div>
+                            <div class="position-absolute top-0 end-0 m-1">
+                                <button type="button" class="btn btn-sm btn-outline-warning edit-field">✏️</button>
+                                <button type="button" class="btn btn-sm btn-outline-danger remove-field">❌</button>
+                            </div>
+                        `;
+                        sectionFields.appendChild(fieldDiv);
+                    });
+                });
+                </text>
+        }
+        else
+        {
+                <text>
+                // ---------------------------
+                // DEFAULT SECTION + FIELDS (only for create mode)
+                // ---------------------------
+                const personalSection = createSection("Personal Details", 0, 0);
+
+                const defaultFields = [
+                    { label: "Name", type: "text", required: true },
+                    { label: "Father Name", type: "text", required: true }
+                ];
+
+                const sectionFields = personalSection.querySelector(".section-fields");
+                sectionFields.innerHTML = "";
+
+                defaultFields.forEach((f, index) => {
+                    const fieldDiv = document.createElement("div");
+                    fieldDiv.classList.add("field-group", "border", "rounded", "p-2", "mb-2", "position-relative", "bg-white");
+                    fieldDiv.dataset.fieldId = "0";
+                    fieldDiv.dataset.label = f.label;
+                    fieldDiv.dataset.type = f.type;
+                    fieldDiv.dataset.required = f.required;
+                    fieldDiv.dataset.options = "[]";
+
+                    fieldDiv.innerHTML = `
+                        <label class="fw-bold">${f.label}${f.required ? ' <span class="text-danger">*</span>' : ''}</label>
+                        <div class="preview mb-2">${getFieldPreviewHTML(f.label, f.type, [], f.required)}</div>
+                        <div class="options-display"></div>
+                        <div class="position-absolute top-0 end-0 m-1">
+                            <button type="button" class="btn btn-sm btn-outline-warning edit-field">✏️</button>
+                            <button type="button" class="btn btn-sm btn-outline-danger remove-field">❌</button>
+                        </div>
+                    `;
+                    sectionFields.appendChild(fieldDiv);
+                });
+                </text>
+        }
+    </script>
+}
