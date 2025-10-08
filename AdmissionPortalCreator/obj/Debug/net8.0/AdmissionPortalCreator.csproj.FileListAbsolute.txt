@@ -524,3 +524,4 @@ C:\Users\shah\Documents\GitHub\dynamic-admission-portal\AdmissionPortalCreator\o
 C:\Users\shah\Documents\GitHub\dynamic-admission-portal\AdmissionPortalCreator\obj\Debug\net8.0\AdmissionPortalCreator.pdb
 C:\Users\shah\Documents\GitHub\dynamic-admission-portal\AdmissionPortalCreator\obj\Debug\net8.0\AdmissionPortalCreator.genruntimeconfig.cache
 C:\Users\shah\Documents\GitHub\dynamic-admission-portal\AdmissionPortalCreator\obj\Debug\net8.0\ref\AdmissionPortalCreator.dll
+C:\Users\shah\Documents\GitHub\dynamic-admission-portal\AdmissionPortalCreator\obj\Debug\net8.0\AdmissionPortalCreator.sourcelink.json

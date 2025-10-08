@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
-
 namespace AdmissionPortalCreator.Controllers
 {
     public class HomeController : Controller
@@ -24,6 +23,7 @@ namespace AdmissionPortalCreator.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Index()
         {
+            //fetched currently signed in user details
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
@@ -33,6 +33,12 @@ namespace AdmissionPortalCreator.Controllers
             // Tenant info
             var tenant = await _context.Tenants
                 .FirstOrDefaultAsync(t => t.TenantId == user.TenantId);
+
+            // Get all forms for this tenant
+            var forms = await _context.Forms
+                .Where(f => f.TenantId == user.TenantId)
+                .OrderByDescending(f => f.CreatedAt)
+                .ToListAsync();
 
             // Users with roles (Admin can see all, Manager maybe restricted)
             var users = await _userManager.Users
@@ -55,12 +61,11 @@ namespace AdmissionPortalCreator.Controllers
             var dashboard = new DashboardViewModel
             {
                 Tenant = tenant,
-                Users = userViewModels
+                Users = userViewModels,
+                Forms = forms
             };
 
             return View(dashboard);
         }
-
-
     }
 }

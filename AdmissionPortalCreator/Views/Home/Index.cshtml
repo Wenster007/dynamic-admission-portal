@@ -1,6 +1,5 @@
 ﻿@model AdmissionPortalCreator.ViewModel.DashboardViewModel
 
-
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
@@ -30,30 +29,49 @@
                         <a asp-controller="Form" asp-action="CreateEdit" class="btn btn-primary">+ Add New</a>
                     </div>
 
-                    <!-- Example table for admissions -->
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Form Name</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @* Loop admissions from your model *@
-                            <tr>
-                                <td>Fall 2025 Admissions</td>
-                                <td>01 Aug 2025</td>
-                                <td>30 Sep 2025</td>
-                                <td>
-                                    <a asp-controller="Admissions" asp-action="Edit" asp-route-id="1" class="btn btn-sm btn-warning">Edit</a>
-                                    <a asp-controller="Admissions" asp-action="Delete" asp-route-id="1" class="btn btn-sm btn-danger">Delete</a>
-                                    <a asp-controller="Admissions" asp-action="AppliedStudents" asp-route-id="1" class="btn btn-sm btn-info">View Students</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    @if (Model.Forms != null && Model.Forms.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Form Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var form in Model.Forms)
+                                {
+                                    var currentDate = DateTime.Now;
+                                    var isActive = form.StartDate <= currentDate && form.EndDate >= currentDate;
+                                    var isPast = form.EndDate < currentDate;
+                                    var statusClass = isActive ? "text-success" : (isPast ? "text-danger" : "text-warning");
+                                    var statusText = isActive ? "Active" : (isPast ? "Closed" : "Upcoming");
+
+                                    <tr>
+                                        <td>@form.Name</td>
+                                        <td>@form.StartDate.ToString("dd MMM yyyy")</td>
+                                        <td>@form.EndDate.ToString("dd MMM yyyy")</td>
+                                        <td>
+                                            <span class="@statusClass fw-bold">@statusText</span>
+                                        </td>
+                                        <td>
+                                            <a asp-controller="Form" asp-action="CreateEdit" asp-route-id="@form.FormId" class="btn btn-sm btn-warning">Edit</a>
+                                            <a asp-controller="Applicants" asp-action="Index" asp-route-formId="@form.FormId" class="btn btn-sm btn-info">View Applicants</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">
+                            No admission forms found. Click "+ Add New" to create your first form.
+                        </div>
+                    }
                 </div>
 
                 <!-- 🔹 Users -->
@@ -87,8 +105,7 @@
                                         {
                                             <a asp-controller="Users" asp-action="Edit" asp-route-id="@u.Id" asp-route-mode="EditPassword" class="btn btn-warning">Change Password</a>
                                         }
-                                </td>
-
+                                    </td>
                                 </tr>
                             }
                         </tbody>

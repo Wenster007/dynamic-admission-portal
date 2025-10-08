@@ -6,5 +6,7 @@ namespace AdmissionPortalCreator.ViewModel
     {
         public Tenant Tenant { get; set; }
         public List<UserViewModel> Users { get; set; }
+        public List<Form> Forms { get; set; } = new List<Form>();
+
     }
 }
