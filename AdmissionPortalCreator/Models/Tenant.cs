@@ -18,7 +18,7 @@ namespace AdmissionPortalCreator.Models
         public string? Phone { get; set; }
 
         // e.g. "uni123.mysite.com" or "/uni123"
-        public string? SubdomainOrUrl { get; set; }
+        public string? Website { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

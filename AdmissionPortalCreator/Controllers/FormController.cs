@@ -125,6 +125,13 @@ namespace AdmissionPortalCreator.Controllers
 
         private async Task CreateNewForm(FormCreationViewModel model, int tenantId)
         {
+            // Generate a random short code (e.g., "A7GZ3P")
+            string randomCode = Guid.NewGuid().ToString("N").Substring(0, 6).ToUpper();
+
+            // Create application website URL
+            string baseUrl = $"{Request.Scheme}://{Request.Host}";
+            string applicationUrl = $"{baseUrl}/apply/{tenantId}/{randomCode}";
+
             var form = new Form
             {
                 TenantId = tenantId,
@@ -132,6 +139,8 @@ namespace AdmissionPortalCreator.Controllers
                 Description = model.Description,
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
+                Status = model.Status,
+                ApplicationWebsite = applicationUrl,
                 CreatedAt = DateTime.Now,
                 FormSections = new List<FormSection>()
             };
@@ -192,6 +201,9 @@ namespace AdmissionPortalCreator.Controllers
             form.Description = model.Description;
             form.StartDate = model.StartDate;
             form.EndDate = model.EndDate;
+            form.Status = model.Status;
+            form.ApplicationWebsite = model.ApplicationWebsite;
+
 
             var existingSectionIds = model.Sections
                 .Where(s => s.SectionId > 0)
@@ -350,6 +362,8 @@ namespace AdmissionPortalCreator.Controllers
                 Description = form.Description,
                 StartDate = form.StartDate,
                 EndDate = form.EndDate,
+                Status = form.Status,
+                ApplicationWebsite = form.ApplicationWebsite,
                 Sections = form.FormSections.OrderBy(s => s.OrderIndex).Select(s => new FormSectionViewModel
                 {
                     SectionId = s.SectionId,

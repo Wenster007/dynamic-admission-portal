@@ -5,6 +5,7 @@
 }
 
 <h2>@ViewData["Title"]</h2>
+<div asp-validation-summary="All" class="text-danger"></div> 
 
 <form id="admission-form" asp-action="CreateEdit" asp-controller="Form" method="post">
     <input type="hidden" asp-for="FormId" />
@@ -33,6 +34,23 @@
                     <label asp-for="EndDate" class="form-label fw-bold">End Date *</label>
                     <input asp-for="EndDate" type="datetime-local" class="form-control" required />
                 </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Status" class="form-label fw-bold">Status *</label>
+                    <select asp-for="Status" class="form-select" required>
+                        <option value="">-- Select Status --</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Active">Active</option>
+                        <option value="Paused">Paused</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ApplicationWebsite" class="form-label fw-bold">Application Website</label>
+                    <input asp-for="ApplicationWebsite" class="form-control" readonly />
+                    <span asp-validation-for="ApplicationWebsite" class="text-danger"></span>
+                </div>
+
             </div>
         </div>
     </div>
