@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj": {}
+    "c:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj": {
+    "c:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj",
+        "projectUniqueName": "c:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj",
         "projectName": "AdmissionPortalCreator",
-        "projectPath": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj",
+        "projectPath": "c:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj",
         "packagesPath": "C:\\Users\\shah\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\obj\\",
+        "outputPath": "c:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

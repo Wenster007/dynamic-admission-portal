@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdmissionPortalCreator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8bbd87283e3d4fceda10ef2ef93226fa2e7e46f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22154067451edeb64b94567646bc30a4226f70a2")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdmissionPortalCreator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdmissionPortalCreator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
