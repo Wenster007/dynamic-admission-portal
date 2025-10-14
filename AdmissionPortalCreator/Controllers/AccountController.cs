@@ -120,10 +120,38 @@ namespace AdmissionPortalCreator.Controllers
         }
 
         // 🔹 Logout
-        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
+            // 1) get the current user BEFORE sign out
+            var user = await _userManager.GetUserAsync(User);
+            bool isStudent = false;
+            bool isManager = false;
+            bool isAdmin = false;
+            if (user != null)
+            {
+                isStudent = await _userManager.IsInRoleAsync(user, "Student");
+                isManager = await _userManager.IsInRoleAsync(user, "Admin");
+                isAdmin = await _userManager.IsInRoleAsync(user, "Manager");
+            }
+
+            // 2) capture session-origin values (if any)
+            int? tenantId = HttpContext.Session.GetInt32("TenantId");
+            string? formCode = HttpContext.Session.GetString("FormCode");
+
+            // 3) sign out
             await _signInManager.SignOutAsync();
+
+            // 4) clear session
+            HttpContext.Session.Clear();
+
+            // 5) redirect based on role + available origin data
+            if ((isStudent || isManager || isAdmin) && tenantId.HasValue && !string.IsNullOrEmpty(formCode))
+            {
+                return Redirect($"/apply/{tenantId}/{formCode}");
+            }
+
+            // default admin/employee login
             return RedirectToAction("Login", "Account");
         }
     }

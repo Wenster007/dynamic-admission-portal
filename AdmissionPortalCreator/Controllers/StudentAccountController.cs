@@ -132,27 +132,25 @@ namespace AdmissionPortalCreator.Controllers
                 return Json(new { success = false, message = "Invalid email or tenant." });
 
             var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, false, false);
+
             if (result.Succeeded)
             {
+                // ✅ Store tenant info for redirection after logout
+                HttpContext.Session.SetInt32("TenantId", model.TenantId);
+                HttpContext.Session.SetString("FormCode", model.FormCode ?? "");
+
                 return Json(new
                 {
                     success = true,
                     message = "Login successful!",
-                    redirectUrl = Url.Action("Apply", new { tenantId = model.TenantId, formCode = model.FormCode })
+                    redirectUrl = Url.Action("Dashboard", "StudentDashboard")
                 });
             }
 
             return Json(new { success = false, message = "Invalid credentials." });
         }
 
-        // --------------------------------------------------------
-        // Step 5: Logout
-        // --------------------------------------------------------
-        [HttpPost]
-        public async Task<IActionResult> Logout()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Apply", "StudentAccount");
-        }
+
+       // Logout is managed together in AccountController logout function.
     }
 }

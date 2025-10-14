@@ -1,0 +1,44 @@
+﻿@model AdmissionPortalCreator.ViewModels.StudentDashboardViewModel
+
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Welcome, @Model.StudentName 👋</h2>
+    <h5 class="text-center text-muted">Institution: @Model.TenantName</h5>
+
+    <hr class="my-4" />
+
+    @if (Model.ActiveForms == null || !Model.ActiveForms.Any())
+    {
+        <div class="alert alert-info text-center">
+            No active applications are currently available.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var form in Model.ActiveForms)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm h-100 border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">@form.Name</h5>
+                            <p class="card-text text-muted">
+                                @form.Description?.Substring(0, Math.Min(form.Description.Length, 120))...
+                            </p>
+                            <p class="small text-secondary">
+                                Active: @form.StartDate.ToShortDateString() → @form.EndDate.ToShortDateString()
+                            </p>
+                            <a href="@Url.Action("ApplyForm", "Student", new { formId = form.FormId })"
+                               class="btn btn-primary btn-sm w-100">
+                                Apply Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

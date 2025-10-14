@@ -1,14 +1,19 @@
-using AdmissionPortalCreator.Data;
+﻿using AdmissionPortalCreator.Data;
 using AdmissionPortalCreator.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// --------------------------------------
+// Database Configuration
+// --------------------------------------
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Identity setup
+// --------------------------------------
+// Identity Configuration
+// --------------------------------------
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.Password.RequireDigit = true;
@@ -19,17 +24,37 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
-// Cookie paths
+// --------------------------------------
+// Cookie Configuration
+// --------------------------------------
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
     options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
+// --------------------------------------
+// MVC and Session
+// --------------------------------------
 builder.Services.AddControllersWithViews();
 
+// ✅ Add distributed memory cache + session support
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// --------------------------------------
+// Build app
+// --------------------------------------
 var app = builder.Build();
 
+// --------------------------------------
+// Middleware Pipeline
+// --------------------------------------
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -40,16 +65,24 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Add this line to ensure [HttpGet("/apply/...")] routes work:
+// ✅ Enable session middleware
+app.UseSession();
+
+// --------------------------------------
+// Routing Configuration
+// --------------------------------------
+
+// ✅ Map attribute-routed controllers (important for [HttpGet("/apply/...")])
 app.MapControllers();
 
-// Default route for admin side
+// ✅ Default route for admin/employee area
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Account}/{action=Login}/{id?}");
 
+// --------------------------------------
 app.Run();
