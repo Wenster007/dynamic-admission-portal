@@ -131,14 +131,13 @@ namespace AdmissionPortalCreator.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FormId"));
 
                     b.Property<string>("ApplicationWebsite")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndDate")
@@ -154,7 +153,8 @@ namespace AdmissionPortalCreator.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("TenantId")
                         .HasColumnType("int");
@@ -175,14 +175,12 @@ namespace AdmissionPortalCreator.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnswerId"));
 
                     b.Property<string>("AnswerValue")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FieldId")
                         .HasColumnType("int");
 
                     b.Property<string>("FilePath")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
@@ -273,6 +271,9 @@ namespace AdmissionPortalCreator.Migrations
                     b.Property<int>("FormId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("FormId1")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("SubmittedAt")
                         .HasColumnType("datetime2");
 
@@ -283,6 +284,8 @@ namespace AdmissionPortalCreator.Migrations
                     b.HasKey("SubmissionId");
 
                     b.HasIndex("FormId");
+
+                    b.HasIndex("FormId1");
 
                     b.HasIndex("UserId");
 
@@ -537,6 +540,10 @@ namespace AdmissionPortalCreator.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("AdmissionPortalCreator.Models.Form", null)
+                        .WithMany("FormSubmissions")
+                        .HasForeignKey("FormId1");
+
                     b.HasOne("AdmissionPortalCreator.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -602,6 +609,8 @@ namespace AdmissionPortalCreator.Migrations
             modelBuilder.Entity("AdmissionPortalCreator.Models.Form", b =>
                 {
                     b.Navigation("FormSections");
+
+                    b.Navigation("FormSubmissions");
                 });
 
             modelBuilder.Entity("AdmissionPortalCreator.Models.FormField", b =>

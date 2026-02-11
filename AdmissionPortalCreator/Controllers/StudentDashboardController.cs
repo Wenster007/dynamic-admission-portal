@@ -48,7 +48,8 @@ namespace AdmissionPortalCreator.Controllers
                     Description = f.Description,
                     StartDate = f.StartDate,
                     EndDate = f.EndDate,
-                    TenantName = f.Tenant.Name
+                    TenantName = f.Tenant.Name,
+                    Status = f.Status
                 })
                 .ToListAsync();
 
@@ -72,9 +73,9 @@ namespace AdmissionPortalCreator.Controllers
         public async Task<IActionResult> ApplyForm(int formId)
         {
             var form = await _context.Forms
-     .Include(f => f.FormSections)
-         .ThenInclude(s => s.FormFields)
-     .FirstOrDefaultAsync(f => f.FormId == formId);
+             .Include(f => f.FormSections)
+                 .ThenInclude(s => s.FormFields)
+             .FirstOrDefaultAsync(f => f.FormId == formId);
 
 
             if (form == null)

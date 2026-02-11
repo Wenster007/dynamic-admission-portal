@@ -1,0 +1,466 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\views\\applicants\\viewsubmission.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\views\\applicants\\viewsubmission.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\views\\applicants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\views\\applicants\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\views\\formsubmission\\submissionsuccess.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\views\\formsubmission\\submissionsuccess.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\controllers\\applicantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\controllers\\applicantscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\views\\formsubmission\\applyform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\views\\formsubmission\\applyform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Migrations\\20260211154940_AddFormSubmissionTables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AdmissionPortalCreator\\Migrations\\20260211154940_AddFormSubmissionTables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\controllers\\formsubmissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\controllers\\formsubmissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\models\\form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\models\\form.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\models\\formsubmission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\models\\formsubmission.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\models\\formanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\models\\formanswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\viewmodel\\formsubmissionviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\viewmodel\\formsubmissionviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\viewmodel\\studentaccountviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\viewmodel\\studentaccountviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\controllers\\studentdashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\controllers\\studentdashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\views\\studentauth\\tenantloginregister.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\views\\studentauth\\tenantloginregister.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\viewmodel\\formcreationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\viewmodel\\formcreationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\views\\studentdashboard\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\views\\studentdashboard\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\viewmodel\\studentdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\viewmodel\\studentdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\views\\form\\createedit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\views\\form\\createedit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\controllers\\formcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\controllers\\formcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\controllers\\studentauthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\controllers\\studentauthcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\viewmodel\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\viewmodel\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|c:\\users\\shah\\documents\\github\\dynamic-admission-portal\\admissionportalcreator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98F114C5-1DD2-403E-A1C8-683D71ABFF46}|AdmissionPortalCreator\\AdmissionPortalCreator.csproj|solutionrelative:admissionportalcreator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ViewSubmission.cshtml",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Applicants\\ViewSubmission.cshtml",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Views\\Applicants\\ViewSubmission.cshtml",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Applicants\\ViewSubmission.cshtml",
+              "RelativeToolTip": "AdmissionPortalCreator\\Views\\Applicants\\ViewSubmission.cshtml",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAkwDwAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-11T16:04:45.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Applicants\\Index.cshtml",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Views\\Applicants\\Index.cshtml",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Applicants\\Index.cshtml",
+              "RelativeToolTip": "AdmissionPortalCreator\\Views\\Applicants\\Index.cshtml",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAAFIAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-11T16:04:15.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ApplicantsController.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\ApplicantsController.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Controllers\\ApplicantsController.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\ApplicantsController.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Controllers\\ApplicantsController.cs",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAAAIgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T16:02:17.056Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "AdmissionPortalCreator\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAABIAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-11T15:57:08.808Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAwEYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T15:55:22.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20260211154940_AddFormSubmissionTables.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Migrations\\20260211154940_AddFormSubmissionTables.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Migrations\\20260211154940_AddFormSubmissionTables.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Migrations\\20260211154940_AddFormSubmissionTables.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Migrations\\20260211154940_AddFormSubmissionTables.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T15:49:41.03Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Form.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Models\\Form.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Models\\Form.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Models\\Form.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Models\\Form.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA3wCoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T14:15:43.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SubmissionSuccess.cshtml",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\FormSubmission\\SubmissionSuccess.cshtml",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Views\\FormSubmission\\SubmissionSuccess.cshtml",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\FormSubmission\\SubmissionSuccess.cshtml",
+              "RelativeToolTip": "AdmissionPortalCreator\\Views\\FormSubmission\\SubmissionSuccess.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-11T15:31:23.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FormSubmissionController.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\FormSubmissionController.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Controllers\\FormSubmissionController.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\FormSubmissionController.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Controllers\\FormSubmissionController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T15:01:50.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "FormSubmissionViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\FormSubmissionViewModel.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\ViewModel\\FormSubmissionViewModel.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\FormSubmissionViewModel.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\ViewModel\\FormSubmissionViewModel.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAxwA4AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T15:03:45.743Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T15:00:58.138Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "FormAnswer.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Models\\FormAnswer.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Models\\FormAnswer.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Models\\FormAnswer.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Models\\FormAnswer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T15:30:46.574Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ApplyForm.cshtml",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\FormSubmission\\ApplyForm.cshtml",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Views\\FormSubmission\\ApplyForm.cshtml",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\FormSubmission\\ApplyForm.cshtml",
+              "RelativeToolTip": "AdmissionPortalCreator\\Views\\FormSubmission\\ApplyForm.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-11T15:21:51.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "FormSubmission.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Models\\FormSubmission.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Models\\FormSubmission.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Models\\FormSubmission.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Models\\FormSubmission.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T15:04:46.261Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "StudentAccountViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\StudentAccountViewModel.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\ViewModel\\StudentAccountViewModel.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\StudentAccountViewModel.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\ViewModel\\StudentAccountViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T05:57:06.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "TenantLoginRegister.cshtml",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\StudentAuth\\TenantLoginRegister.cshtml",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Views\\StudentAuth\\TenantLoginRegister.cshtml",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\StudentAuth\\TenantLoginRegister.cshtml",
+              "RelativeToolTip": "AdmissionPortalCreator\\Views\\StudentAuth\\TenantLoginRegister.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-11T15:27:55.897Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\StudentDashboard\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Views\\StudentDashboard\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\StudentDashboard\\Dashboard.cshtml",
+              "RelativeToolTip": "AdmissionPortalCreator\\Views\\StudentDashboard\\Dashboard.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACkAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-11T14:11:07.597Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "StudentDashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\StudentDashboardController.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Controllers\\StudentDashboardController.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\StudentDashboardController.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Controllers\\StudentDashboardController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T14:27:02.493Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "StudentDashboardViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\StudentDashboardViewModel.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\ViewModel\\StudentDashboardViewModel.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\StudentDashboardViewModel.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\ViewModel\\StudentDashboardViewModel.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAqwBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T14:19:37.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "FormCreationViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\FormCreationViewModel.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\ViewModel\\FormCreationViewModel.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\FormCreationViewModel.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\ViewModel\\FormCreationViewModel.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAswBcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T14:51:44.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "CreateEdit.cshtml",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Form\\CreateEdit.cshtml",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Views\\Form\\CreateEdit.cshtml",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Form\\CreateEdit.cshtml",
+              "RelativeToolTip": "AdmissionPortalCreator\\Views\\Form\\CreateEdit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-11T15:17:09.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "FormController.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\FormController.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Controllers\\FormController.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\FormController.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Controllers\\FormController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T14:41:16.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "StudentAuthController.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\StudentAuthController.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Controllers\\StudentAuthController.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Controllers\\StudentAuthController.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Controllers\\StudentAuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T14:33:34.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "DashboardViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\DashboardViewModel.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\ViewModel\\DashboardViewModel.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\ViewModel\\DashboardViewModel.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\ViewModel\\DashboardViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-11T14:44:35.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "AdmissionPortalCreator\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-11T14:58:33.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Program.cs",
+              "RelativeDocumentMoniker": "AdmissionPortalCreator\\Program.cs",
+              "ToolTip": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\Program.cs",
+              "RelativeToolTip": "AdmissionPortalCreator\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-10T05:43:18.315Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

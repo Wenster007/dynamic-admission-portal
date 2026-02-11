@@ -1,0 +1,41 @@
+﻿@model AdmissionPortalCreator.Models.FormSubmission
+
+@{
+    ViewData["Title"] = "Submission Successful";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-success">
+                <div class="card-body text-center py-5">
+                    <div class="mb-4">
+                        <i class="bi bi-check-circle-fill text-success" style="font-size: 5rem;"></i>
+                    </div>
+                    <h2 class="text-success mb-3">Application Submitted Successfully!</h2>
+                    <p class="lead mb-4">
+                        Your application for <strong>@Model.Form.Name</strong> has been received.
+                    </p>
+                    <div class="alert alert-info">
+                        <strong>Submission ID:</strong> @Model.SubmissionId<br />
+                        <strong>Submitted on:</strong> @Model.SubmittedAt.ToString("MMMM dd, yyyy hh:mm tt")
+                    </div>
+                    <p class="text-muted mb-4">
+                        We will review your application and contact you via email at <strong>@Model.User.Email</strong>.
+                    </p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a asp-action="ViewSubmission" asp-route-submissionId="@Model.SubmissionId" class="btn btn-primary">
+                            View My Submission
+                        </a>
+                        <a asp-action="MySubmissions" class="btn btn-outline-secondary">
+                            All My Submissions
+                        </a>
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">
+                            Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

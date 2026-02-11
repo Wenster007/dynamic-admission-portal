@@ -10,7 +10,7 @@
 
     <hr class="my-4" />
 
-    @if (Model.ActiveForms == null || !Model.ActiveForms.Any())
+    @if (Model.ActiveForms == null || !Model.ActiveForms.Any(f => f.Status == "Active"))
     {
         <div class="alert alert-info text-center">
             No active applications are currently available.
@@ -31,7 +31,7 @@
                             <p class="small text-secondary">
                                 Active: @form.StartDate.ToShortDateString() → @form.EndDate.ToShortDateString()
                             </p>
-                            <a href="@Url.Action("ApplyForm", "Student", new { formId = form.FormId })"
+                            <a href="@Url.Action("ApplyForm", "FormSubmission", new { formId = form.FormId })"
                                class="btn btn-primary btn-sm w-100">
                                 Apply Now
                             </a>

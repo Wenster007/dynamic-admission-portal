@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4PAZ5RPlKUc=",
+  "dgSpecHash": "gF5kxNo2EGE=",
   "success": true,
-  "projectFilePath": "c:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj",
+  "projectFilePath": "C:\\Users\\shah\\Documents\\GitHub\\dynamic-admission-portal\\AdmissionPortalCreator\\AdmissionPortalCreator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\shah\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\shah\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

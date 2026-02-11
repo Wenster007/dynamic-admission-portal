@@ -1,0 +1,171 @@
+﻿@model AdmissionPortalCreator.ViewModels.FormSubmissionViewModel
+
+@{
+    ViewData["Title"] = "Apply - " + Model.FormName;
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Form Header -->
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body text-center">
+                    <h2 class="fw-bold text-primary">@Model.FormName</h2>
+                    @if (!string.IsNullOrEmpty(Model.FormDescription))
+                    {
+                        <p class="text-muted mb-0">@Model.FormDescription</p>
+                    }
+                </div>
+            </div>
+
+            <!-- Application Form -->
+            <form asp-action="SubmitForm" asp-controller="FormSubmission" method="post" enctype="multipart/form-data" id="application-form">
+                <input type="hidden" name="formId" value="@Model.FormId" />
+
+                @foreach (var section in Model.Sections)
+                {
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">@(section.Title)</h4>
+                            @if (!string.IsNullOrEmpty(section.Description))
+                            {
+                                <small>@(section.Description)</small>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @foreach (var field in section.Fields)
+                                {
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">
+                                            @field.Label
+                                            @if (field.IsRequired)
+                                            {
+                                                <span class="text-danger">*</span>
+                                            }
+                                        </label>
+
+                                        @switch (field.FieldType.ToLower())
+                                        {
+                                            case "text":
+                                                <input type="text"
+                                                       name="field_@field.FieldId"
+                                                       class="form-control"
+                                                       placeholder="Enter @field.Label"
+                                                       required="@field.IsRequired" />
+                                                break;
+
+                                            case "email":
+                                                <input type="email"
+                                                       name="field_@field.FieldId"
+                                                       class="form-control"
+                                                       placeholder="Enter @field.Label"
+                                                       required="@field.IsRequired" />
+                                                break;
+
+                                            case "number":
+                                                <input type="number"
+                                                       name="field_@field.FieldId"
+                                                       class="form-control"
+                                                       placeholder="Enter @field.Label"
+                                                       required="@field.IsRequired" />
+                                                break;
+
+                                            case "date":
+                                                <input type="date"
+                                                       name="field_@field.FieldId"
+                                                       class="form-control"
+                                                       required="@field.IsRequired" />
+                                                break;
+
+                                            case "dropdown":
+                                                <select name="field_@field.FieldId"
+                                                        class="form-select"
+                                                        required="@field.IsRequired">
+                                                    <option value="">-- Select @field.Label --</option>
+                                                    @foreach (var option in field.Options)
+                                                    {
+                                                        <option value="@option">@option</option>
+                                                    }
+                                                </select>
+                                                break;
+
+                                            case "yesno":
+                                                <div class="mt-2">
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input"
+                                                               type="radio"
+                                                               name="field_@field.FieldId"
+                                                               id="field_@(field.FieldId)_yes"
+                                                               value="Yes"
+                                                               required="@field.IsRequired">
+                                                        <label class="form-check-label" for="field_@(field.FieldId)_yes">
+                                                            Yes
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input"
+                                                               type="radio"
+                                                               name="field_@field.FieldId"
+                                                               id="field_@(field.FieldId)_no"
+                                                               value="No"
+                                                               required="@field.IsRequired">
+                                                        <label class="form-check-label" for="field_@(field.FieldId)_no">
+                                                            No
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                break;
+
+                                            case "file":
+                                                <input type="file"
+                                                       name="file_@field.FieldId"
+                                                       class="form-control"
+                                                       required="@field.IsRequired" />
+                                                <small class="text-muted">Maximum file size: 5MB</small>
+                                                break;
+
+                                            default:
+                                                <input type="text"
+                                                       name="field_@field.FieldId"
+                                                       class="form-control"
+                                                       placeholder="Enter @field.Label"
+                                                       required="@field.IsRequired" />
+                                                break;
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- Submit Button -->
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <button type="submit" class="btn btn-success btn-lg px-5">
+                            <i class="bi bi-check-circle"></i> Submit Application
+                        </button>
+                        <a asp-action="Index" asp-controller="Home" class="btn btn-secondary btn-lg px-5 ms-2">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Form validation feedback
+        document.getElementById('application-form').addEventListener('submit', function(e) {
+            if (!this.checkValidity()) {
+                e.preventDefault();
+                e.stopPropagation();
+                alert('Please fill in all required fields.');
+            }
+            this.classList.add('was-validated');
+        });
+    </script>
+}

@@ -116,7 +116,7 @@
                 const data = form.serialize();
                 const isLogin = @isLogin.ToString().ToLower();
 
-                const url = isLogin ? '/StudentAccount/Login' : '/StudentAccount/Register';
+                const url = isLogin ? '/StudentAuth/Login' : '/StudentAuth/Register';
 
                 $.post(url, data, function (response) {
                     const alertBox = $('#alertBox');

@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace AdmissionPortalCreator.Controllers
 {
-    public class StudentAccountController : Controller
+    public class StudentAuthController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public StudentAccountController(
+        public StudentAuthController(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,

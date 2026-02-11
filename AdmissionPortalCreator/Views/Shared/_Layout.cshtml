@@ -20,7 +20,10 @@
                 {
                     <span class="me-3">Hello, @User.Identity.Name!</span>
                     <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                            Logout
+                        </button>
+                        @Html.AntiForgeryToken()
                     </form>
                 }
                 else
