@@ -146,9 +146,18 @@
                         <button type="submit" class="btn btn-success btn-lg px-5">
                             <i class="bi bi-check-circle"></i> Submit Application
                         </button>
-                        <a asp-action="Index" asp-controller="Home" class="btn btn-secondary btn-lg px-5 ms-2">
-                            Cancel
-                        </a>
+                        @if (User.IsInRole("Student"))
+                        {
+                            <a asp-controller="Student" asp-action="Dashboard" class="btn btn-secondary btn-lg px-5 ms-2">
+                                Cancel
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-lg px-5 ms-2">
+                                Cancel
+                            </a>
+                        }
                     </div>
                 </div>
             </form>
