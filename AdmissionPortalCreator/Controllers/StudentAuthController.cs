@@ -103,7 +103,12 @@ namespace AdmissionPortalCreator.Controllers
                     await _roleManager.CreateAsync(new IdentityRole("Student"));
 
                 await _userManager.AddToRoleAsync(user, "Student");
+                await _signInManager.SignOutAsync();
                 await _signInManager.SignInAsync(user, isPersistent: false);
+
+                HttpContext.Session.SetInt32("TenantId", model.TenantId);
+                HttpContext.Session.SetString("FormCode", model.FormCode ?? "");
+
 
                 return Json(new
                 {

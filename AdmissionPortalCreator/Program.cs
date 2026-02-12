@@ -24,6 +24,10 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
+// ✅ CRITICAL: Configure UserClaimsPrincipalFactory to include roles in claims
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>,
+    UserClaimsPrincipalFactory<ApplicationUser, IdentityRole>>();
+
 // --------------------------------------
 // Cookie Configuration
 // --------------------------------------
@@ -63,19 +67,16 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
+
+// ✅ Session MUST come before Authentication
 app.UseSession();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// ✅ Enable session middleware
-app.UseSession();
-
 // --------------------------------------
 // Routing Configuration
 // --------------------------------------
-
 // ✅ Map attribute-routed controllers (important for [HttpGet("/apply/...")])
 app.MapControllers();
 

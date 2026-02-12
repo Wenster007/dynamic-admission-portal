@@ -8,81 +8,61 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdmissionPortalCreator.Controllers
 {
-    [Authorize(Roles = "Student,Admin,Manager")]
+    [Authorize(Roles = "Student")]
     public class StudentDashboardController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public StudentDashboardController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public StudentDashboardController(
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
         }
 
-        // -----------------------------------------
-        // GET: /Student/Dashboard
-        // -----------------------------------------
         public async Task<IActionResult> Dashboard()
         {
-            // Get current logged-in student
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
-                return RedirectToAction("Login", "StudentAccount");
+                return RedirectToAction("Login", "Account");
 
-            // Get tenantId of student
             var tenantId = user.TenantId;
+            var currentDate = DateTime.Now;
+
+            // Get tenant name
+            var tenantName = await _context.Tenants
+                .Where(t => t.TenantId == tenantId)
+                .Select(t => t.Name)
+                .FirstOrDefaultAsync();
 
             // Get active forms for this tenant
-            var currentDate = DateTime.UtcNow;
-
             var activeForms = await _context.Forms
                 .Where(f => f.TenantId == tenantId &&
-                            f.StartDate <= currentDate &&
-                            f.EndDate >= currentDate)
-                .OrderByDescending(f => f.CreatedAt)
-                .Select(f => new StudentDashboardFormViewModel
-                {
-                    FormId = f.FormId,
-                    Name = f.Name,
-                    Description = f.Description,
-                    StartDate = f.StartDate,
-                    EndDate = f.EndDate,
-                    TenantName = f.Tenant.Name,
-                    Status = f.Status
-                })
+                           f.StartDate <= currentDate &&
+                           f.EndDate >= currentDate)
+                .OrderBy(f => f.CreatedAt)
                 .ToListAsync();
+
+            // ✅ Get all submissions by this student
+            var submissions = await _context.FormSubmissions
+                .Where(s => s.UserId == user.Id)
+                .ToListAsync();
+
+            // ✅ Get list of form IDs the student has already submitted
+            var submittedFormIds = submissions.Select(s => s.FormId).ToList();
 
             var model = new StudentDashboardViewModel
             {
-                StudentName = user.FullName,
-                TenantName = await _context.Tenants
-                    .Where(t => t.TenantId == tenantId)
-                    .Select(t => t.Name)
-                    .FirstOrDefaultAsync(),
-                ActiveForms = activeForms
+                StudentName = user.FullName ?? user.UserName,
+                TenantName = tenantName ?? "Unknown Institution",
+                ActiveForms = activeForms,
+                SubmittedFormIds = submittedFormIds,
+                Submissions = submissions
             };
 
             return View(model);
-        }
-
-        // -----------------------------------------
-        // GET: /Student/ApplyForm/{formId}
-        // -----------------------------------------
-        [HttpGet]
-        public async Task<IActionResult> ApplyForm(int formId)
-        {
-            var form = await _context.Forms
-             .Include(f => f.FormSections)
-                 .ThenInclude(s => s.FormFields)
-             .FirstOrDefaultAsync(f => f.FormId == formId);
-
-
-            if (form == null)
-                return NotFound("Form not found.");
-
-            // You can later show the form fields dynamically
-            return View(form);
         }
     }
 }

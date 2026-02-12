@@ -23,14 +23,28 @@ namespace AdmissionPortalCreator.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
+        // Helper method to redirect based on user role
+        private IActionResult RedirectToUserDashboard()
+        {
+            Console.WriteLine(User.IsInRole("Student"));
+            if (User.IsInRole("Student"))
+            {
+                return RedirectToAction("Dashboard", "StudentDashboard");
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet]
         public async Task<IActionResult> ApplyForm(int formId)
         {
-            var form = await _context.Forms
-                .Include(f => f.FormSections)
-                    .ThenInclude(s => s.FormFields)
-                        .ThenInclude(fld => fld.FieldOptions)
-                .FirstOrDefaultAsync(f => f.FormId == formId);
+
+            var currentUser = await _userManager.GetUserAsync(User);
+
+                var form = await _context.Forms
+                    .Include(f => f.FormSections)
+                        .ThenInclude(s => s.FormFields)
+                            .ThenInclude(fld => fld.FieldOptions)
+                    .FirstOrDefaultAsync(f => f.FormId == formId);
 
             if (form == null)
                 return NotFound();
@@ -39,13 +53,30 @@ namespace AdmissionPortalCreator.Controllers
             if (form.Status != "Active")
             {
                 TempData["Error"] = "This form is not currently accepting submissions.";
-                return RedirectToAction("Index", "Home");
+                return RedirectToUserDashboard();
             }
 
             if (DateTime.Now < form.StartDate || DateTime.Now > form.EndDate)
             {
                 TempData["Error"] = "This form is not currently open for submissions.";
-                return RedirectToAction("Index", "Home");
+                return RedirectToUserDashboard();
+            }
+
+            // Check if user is authenticated (for students)
+            if (User.Identity.IsAuthenticated)
+            {
+                if (currentUser != null)
+                {
+                    // Check if student has already submitted this form
+                    var existingSubmission = await _context.FormSubmissions
+                        .AnyAsync(fs => fs.FormId == formId && fs.UserId == currentUser.Id);
+
+                    if (existingSubmission)
+                    {
+                        TempData["Error"] = "You have already submitted this form.";
+                        return RedirectToUserDashboard();
+                    }
+                }
             }
 
             var model = new FormSubmissionViewModel
@@ -97,14 +128,20 @@ namespace AdmissionPortalCreator.Controllers
                 if (form == null)
                 {
                     TempData["Error"] = "Form not found.";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToUserDashboard();
                 }
 
                 // Check if form is still accepting submissions
-                if (form.Status != "Active" || DateTime.Now < form.StartDate || DateTime.Now > form.EndDate)
+                if (form.Status != "Active")
+                {
+                    TempData["Error"] = "This form is not currently accepting submissions.";
+                    return RedirectToUserDashboard();
+                }
+
+                if (DateTime.Now < form.StartDate || DateTime.Now > form.EndDate)
                 {
                     TempData["Error"] = "This form is no longer accepting submissions.";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToUserDashboard();
                 }
 
                 // Check if user has already submitted this form
@@ -114,7 +151,7 @@ namespace AdmissionPortalCreator.Controllers
                 if (existingSubmission)
                 {
                     TempData["Error"] = "You have already submitted this form.";
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToUserDashboard();
                 }
 
                 // Create the submission record
@@ -133,14 +170,11 @@ namespace AdmissionPortalCreator.Controllers
                     .SelectMany(s => s.FormFields)
                     .ToList();
 
+                var hasErrors = false;
+                var errorMessages = new List<string>();
+
                 foreach (var field in allFields)
                 {
-                    var answer = new FormAnswer
-                    {
-                        SubmissionId = submission.SubmissionId,
-                        FieldId = field.FieldId
-                    };
-
                     // Handle file uploads
                     if (field.FieldType.ToLower() == "file")
                     {
@@ -152,22 +186,27 @@ namespace AdmissionPortalCreator.Controllers
                             // Validate file size (5MB limit)
                             if (file.Length > 5 * 1024 * 1024)
                             {
-                                ModelState.AddModelError("", $"File for '{field.Label}' exceeds 5MB limit.");
+                                errorMessages.Add($"File for '{field.Label}' exceeds 5MB limit.");
+                                hasErrors = true;
                                 continue;
                             }
 
                             // Save the file
                             var filePath = await SaveFileAsync(file, user.Id, submission.SubmissionId, field.FieldId);
-                            answer.FilePath = filePath;
-                            answer.AnswerValue = file.FileName; // Store original filename
+
+                            var answer = new FormAnswer
+                            {
+                                SubmissionId = submission.SubmissionId,
+                                FieldId = field.FieldId,
+                                FilePath = filePath,
+                                AnswerValue = file.FileName
+                            };
+                            _context.FormAnswers.Add(answer);
                         }
                         else if (field.IsRequired)
                         {
-                            ModelState.AddModelError("", $"File for '{field.Label}' is required.");
-                            // Delete the submission since validation failed
-                            _context.FormSubmissions.Remove(submission);
-                            await _context.SaveChangesAsync();
-                            return RedirectToAction("ApplyForm", new { formId });
+                            errorMessages.Add($"File for '{field.Label}' is required.");
+                            hasErrors = true;
                         }
                     }
                     else
@@ -178,27 +217,50 @@ namespace AdmissionPortalCreator.Controllers
 
                         if (field.IsRequired && string.IsNullOrWhiteSpace(value))
                         {
-                            ModelState.AddModelError("", $"'{field.Label}' is required.");
-                            // Delete the submission since validation failed
-                            _context.FormSubmissions.Remove(submission);
-                            await _context.SaveChangesAsync();
-                            return RedirectToAction("ApplyForm", new { formId });
+                            errorMessages.Add($"'{field.Label}' is required.");
+                            hasErrors = true;
+                            continue;
                         }
 
-                        answer.AnswerValue = value;
+                        // Only save answer if there's a value
+                        if (!string.IsNullOrWhiteSpace(value))
+                        {
+                            var answer = new FormAnswer
+                            {
+                                SubmissionId = submission.SubmissionId,
+                                FieldId = field.FieldId,
+                                AnswerValue = value
+                            };
+                            _context.FormAnswers.Add(answer);
+                        }
                     }
-
-                    _context.FormAnswers.Add(answer);
                 }
 
+                // If there are validation errors, rollback and show errors
+                if (hasErrors)
+                {
+                    _context.FormSubmissions.Remove(submission);
+                    await _context.SaveChangesAsync();
+
+                    TempData["Error"] = string.Join("<br/>", errorMessages);
+                    return RedirectToAction("ApplyForm", new { formId });
+                }
+
+                // Save all answers
                 await _context.SaveChangesAsync();
 
                 TempData["Success"] = "Your application has been submitted successfully!";
                 return RedirectToAction("SubmissionSuccess", new { submissionId = submission.SubmissionId });
             }
+            catch (DbUpdateException dbEx)
+            {
+                var innerMessage = dbEx.InnerException?.Message ?? dbEx.Message;
+                TempData["Error"] = $"Database error: {innerMessage}";
+                return RedirectToAction("ApplyForm", new { formId });
+            }
             catch (Exception ex)
             {
-                TempData["Error"] = "An error occurred while submitting your application. Please try again.";
+                TempData["Error"] = $"An error occurred: {ex.Message}";
                 return RedirectToAction("ApplyForm", new { formId });
             }
         }
@@ -271,15 +333,22 @@ namespace AdmissionPortalCreator.Controllers
                     .ThenInclude(f => f.FormSections)
                         .ThenInclude(sec => sec.FormFields)
                 .Include(s => s.FormAnswers)
-                    .ThenInclude(a => a.FormField)  // CHANGED FROM .Field to .FormField
+                    .ThenInclude(a => a.FormField)
                 .FirstOrDefaultAsync(s => s.SubmissionId == submissionId);
 
             if (submission == null)
                 return NotFound();
 
-            // Verify the current user owns this submission
+            // Verify the current user owns this submission OR is admin/manager
             var currentUser = await _userManager.GetUserAsync(User);
-            if (currentUser?.Id != submission.UserId)
+            if (currentUser == null)
+                return RedirectToAction("Login", "Account");
+
+            // Allow access if: student viewing own submission OR admin/manager viewing any submission
+            var isOwnSubmission = currentUser.Id == submission.UserId;
+            var isAdminOrManager = User.IsInRole("Admin") || User.IsInRole("Manager");
+
+            if (!isOwnSubmission && !isAdminOrManager)
                 return Forbid();
 
             return View(submission);

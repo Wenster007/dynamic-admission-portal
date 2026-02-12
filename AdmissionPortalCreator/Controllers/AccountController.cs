@@ -131,8 +131,8 @@ namespace AdmissionPortalCreator.Controllers
             if (user != null)
             {
                 isStudent = await _userManager.IsInRoleAsync(user, "Student");
-                isManager = await _userManager.IsInRoleAsync(user, "Admin");
-                isAdmin = await _userManager.IsInRoleAsync(user, "Manager");
+                isManager = await _userManager.IsInRoleAsync(user, "Manager");  
+                isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
             }
 
             // 2) capture session-origin values (if any)
