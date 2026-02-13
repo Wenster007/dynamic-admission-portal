@@ -4,43 +4,81 @@
     ViewData["Title"] = "View Application";
 }
 
-<div class="container mt-4">
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <!-- Header -->
-            <div class="card mb-4 shadow-sm border-primary">
-                <div class="card-header bg-primary text-white">
-                    <div class="d-flex justify-content-between align-items-center">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-3">
                         <div>
-                            <h3 class="mb-1">Application Details</h3>
-                            <small>Submission ID: #@Model.SubmissionId</small>
+                            <h3 class="mb-2 text-dark fw-bold">Application Details</h3>
+                            <p class="text-muted mb-0 small">Submission ID: <span class="badge bg-light text-dark border">#@Model.SubmissionId</span></p>
                         </div>
-                        <span class="badge bg-success fs-6">Submitted</span>
+                        <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">Submitted</span>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <strong><i class="bi bi-file-earmark-text"></i> Form:</strong>
-                            <p class="mb-0">@Model.Form.Name</p>
+
+                    <hr class="my-4">
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-text text-muted me-2 mt-1" viewBox="0 0 16 16">
+                                    <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z" />
+                                    <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+                                </svg>
+                                <div>
+                                    <small class="text-muted d-block mb-1">Form</small>
+                                    <strong>@Model.Form.Name</strong>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <strong><i class="bi bi-calendar-event"></i> Submitted On:</strong>
-                            <p class="mb-0">@Model.SubmittedAt.ToString("MMMM dd, yyyy hh:mm tt")</p>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar-event text-muted me-2 mt-1" viewBox="0 0 16 16">
+                                    <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z" />
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
+                                </svg>
+                                <div>
+                                    <small class="text-muted d-block mb-1">Submitted On</small>
+                                    <strong>@Model.SubmittedAt.ToString("MMMM dd, yyyy hh:mm tt")</strong>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <strong><i class="bi bi-person-fill"></i> Applicant:</strong>
-                            <p class="mb-0">@(Model.User.FullName ?? Model.User.UserName)</p>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-fill text-muted me-2 mt-1" viewBox="0 0 16 16">
+                                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg>
+                                <div>
+                                    <small class="text-muted d-block mb-1">Applicant</small>
+                                    <strong>@(Model.User.FullName ?? Model.User.UserName)</strong>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <strong><i class="bi bi-envelope-fill"></i> Email:</strong>
-                            <p class="mb-0">@Model.User.Email</p>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope-fill text-muted me-2 mt-1" viewBox="0 0 16 16">
+                                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+                                </svg>
+                                <div>
+                                    <small class="text-muted d-block mb-1">Email</small>
+                                    <strong>@Model.User.Email</strong>
+                                </div>
+                            </div>
                         </div>
                         @if (!string.IsNullOrEmpty(Model.User.PhoneNumber))
                         {
-                            <div class="col-md-6 mb-3">
-                                <strong><i class="bi bi-telephone-fill"></i> Phone:</strong>
-                                <p class="mb-0">@Model.User.PhoneNumber</p>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-telephone-fill text-muted me-2 mt-1" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
+                                    </svg>
+                                    <div>
+                                        <small class="text-muted d-block mb-1">Phone</small>
+                                        <strong>@Model.User.PhoneNumber</strong>
+                                    </div>
+                                </div>
                             </div>
                         }
                     </div>
@@ -50,28 +88,35 @@
             <!-- Application Data -->
             @foreach (var sec in Model.Form.FormSections.OrderBy(s => s.OrderIndex))
             {
-                <div class="card mb-3 shadow-sm">
-                    <div class="card-header bg-light">
-                        <h5 class="mb-0">
-                            <i class="bi bi-folder"></i> @sec.Title
+                <div class="card border-0 shadow-sm mb-3">
+                    <div class="card-header bg-white border-bottom py-3">
+                        <h5 class="mb-0 fw-bold text-dark">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder me-2" viewBox="0 0 16 16">
+                                <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
+                            </svg>
+                            @sec.Title
                         </h5>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
+                    <div class="card-body p-4">
+                        <div class="row g-4">
                             @foreach (var field in sec.FormFields.OrderBy(f => f.OrderIndex))
                             {
                                 var answer = Model.FormAnswers.FirstOrDefault(a => a.FieldId == field.FieldId);
 
-                                <div class="col-md-6 mb-3">
-                                    <div class="border-start border-primary border-3 ps-3">
-                                        <strong class="text-primary">@field.Label:</strong>
-                                        <div class="mt-1">
+                                <div class="col-md-6">
+                                    <div class="border-start border-3 border-secondary ps-3">
+                                        <small class="text-muted d-block mb-1">@field.Label</small>
+                                        <div>
                                             @if (field.FieldType.ToLower() == "file" && answer != null)
                                             {
                                                 if (!string.IsNullOrEmpty(answer.FilePath))
                                                 {
-                                                    <a href="@answer.FilePath" target="_blank" class="btn btn-sm btn-outline-primary">
-                                                        <i class="bi bi-download"></i> Download: @answer.AnswerValue
+                                                    <a href="@answer.FilePath" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download me-1" viewBox="0 0 16 16">
+                                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                                                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                                                        </svg>
+                                                        @answer.AnswerValue
                                                     </a>
                                                 }
                                                 else
@@ -81,7 +126,7 @@
                                             }
                                             else if (answer != null && !string.IsNullOrEmpty(answer.AnswerValue))
                                             {
-                                                <p class="mb-0">@answer.AnswerValue</p>
+                                                <strong class="text-dark">@answer.AnswerValue</strong>
                                             }
                                             else
                                             {
@@ -97,22 +142,31 @@
             }
 
             <!-- Actions -->
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    @* ✅ Smart back button based on user role *@
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center py-4">
                     @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
                     {
-                        <a asp-controller="Applicants" asp-action="Index" asp-route-formId="@Model.FormId" class="btn btn-secondary btn-lg px-5">
-                            <i class="bi bi-arrow-left"></i> Back to Applicants
+                        <a asp-controller="Applicants" asp-action="Index" asp-route-formId="@Model.FormId" class="btn btn-dark btn-lg px-4 me-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-1" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                            </svg>
+                            Back to Applicants
                         </a>
-                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary btn-lg px-5">
-                            <i class="bi bi-house"></i> Dashboard
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary btn-lg px-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house me-1" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+                                <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+                            </svg>
+                            Dashboard
                         </a>
                     }
                     else if (User.IsInRole("Student"))
                     {
-                        <a asp-controller="StudentDashboard" asp-action="Dashboard" class="btn btn-secondary btn-lg px-5">
-                            <i class="bi bi-arrow-left"></i> Back to Dashboard
+                        <a asp-controller="StudentDashboard" asp-action="Dashboard" class="btn btn-dark btn-lg px-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-1" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                            </svg>
+                            Back to Dashboard
                         </a>
                     }
                 </div>

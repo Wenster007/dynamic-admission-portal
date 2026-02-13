@@ -1,235 +1,111 @@
-﻿@model AdmissionPortalCreator.ViewModels.StudentDashboardViewModel
+﻿@model List<AdmissionPortalCreator.Models.FormSubmission>
 @{
-    ViewData["Title"] = "Student Dashboard";
+    ViewData["Title"] = "Applicants";
+    var form = ViewBag.Form as AdmissionPortalCreator.Models.Form;
 }
 
-<div class="container-fluid px-4 py-5">
-    <!-- Welcome Header -->
-    <div class="row mb-4">
+<div class="container-fluid">
+    <div class="row">
         <div class="col-12">
-            <div class="card border-0 shadow-sm bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                <div class="card-body text-white p-4">
-                    <h2 class="mb-2">👋 Welcome back, @Model.StudentName!</h2>
-                    <p class="mb-0 opacity-75">
-                        <i class="bi bi-building"></i> @Model.TenantName
+            <!-- Header -->
+            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+                <div>
+                    <h3 class="mb-1 text-dark fw-bold">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-people-fill me-2" viewBox="0 0 16 16">
+                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                            <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                            <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                        </svg>
+                        Applicants: @form.Name
+                    </h3>
+                    <p class="text-muted mb-0 small">
+                        <span class="badge bg-light text-dark border me-2">@Model.Count Total Submissions</span>
+                        <span class="text-muted">@form.StartDate.ToString("MMM dd, yyyy") - @form.EndDate.ToString("MMM dd, yyyy")</span>
                     </p>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Statistics Cards -->
-    <div class="row g-3 mb-4">
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center">
-                    <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                        <i class="bi bi-file-earmark-text fs-3 text-primary"></i>
-                    </div>
-                    <h3 class="mb-1">@(Model.ActiveForms?.Count(f => f.Status == "Active") ?? 0)</h3>
-                    <p class="text-muted mb-0 small">Active Applications</p>
+                <div class="d-flex gap-2">
+                    <a asp-action="ExportCSV" asp-route-formId="@form.FormId" class="btn btn-outline-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download me-1" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg>
+                        Export CSV
+                    </a>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left me-1" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                        </svg>
+                        Back
+                    </a>
                 </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center">
-                    <div class="rounded-circle bg-success bg-opacity-10 d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                        <i class="bi bi-check-circle fs-3 text-success"></i>
-                    </div>
-                    <h3 class="mb-1">@(Model.SubmittedFormIds?.Count ?? 0)</h3>
-                    <p class="text-muted mb-0 small">Submitted Applications</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body text-center">
-                    <div class="rounded-circle bg-warning bg-opacity-10 d-inline-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
-                        <i class="bi bi-hourglass-split fs-3 text-warning"></i>
-                    </div>
-                    <h3 class="mb-1">@(Model.ActiveForms?.Count(f => f.Status == "Active" && !(Model.SubmittedFormIds?.Contains(f.FormId) ?? false)) ?? 0)</h3>
-                    <p class="text-muted mb-0 small">Pending Applications</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Available Applications Section -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <h4 class="mb-3">
-                <i class="bi bi-clipboard-check"></i> Available Applications
-            </h4>
-        </div>
-    </div>
-
-    @if (Model.ActiveForms == null || !Model.ActiveForms.Any(f => f.Status == "Active"))
-    {
-        <div class="row">
-            <div class="col-12">
+            <!-- Content -->
+            @if (Model.Any())
+            {
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="bg-white border-bottom">
+                                    <tr>
+                                        <th class="px-4 py-3 text-muted fw-semibold">ID</th>
+                                        <th class="px-4 py-3 text-muted fw-semibold">Applicant Name</th>
+                                        <th class="px-4 py-3 text-muted fw-semibold">Email</th>
+                                        <th class="px-4 py-3 text-muted fw-semibold">Phone</th>
+                                        <th class="px-4 py-3 text-muted fw-semibold">Submitted On</th>
+                                        <th class="px-4 py-3 text-muted fw-semibold text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white">
+                                    @foreach (var submission in Model)
+                                    {
+                                        <tr>
+                                            <td class="px-4 py-3">
+                                                <span class="badge bg-light text-dark border">#@submission.SubmissionId</span>
+                                            </td>
+                                            <td class="px-4 py-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px; font-size: 14px;">
+                                                        @((submission.User.FullName ?? submission.User.UserName)?.Substring(0, 1).ToUpper())
+                                                    </div>
+                                                    <strong>@(submission.User.FullName ?? submission.User.UserName)</strong>
+                                                </div>
+                                            </td>
+                                            <td class="px-4 py-3 text-muted">@submission.User.Email</td>
+                                            <td class="px-4 py-3 text-muted">@(submission.User.PhoneNumber ?? "N/A")</td>
+                                            <td class="px-4 py-3 text-muted">@submission.SubmittedAt.ToString("MMM dd, yyyy hh:mm tt")</td>
+                                            <td class="px-4 py-3 text-end">
+                                                <a asp-action="ViewSubmission"
+                                                   asp-route-submissionId="@submission.SubmissionId"
+                                                   class="btn btn-sm btn-dark">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-eye me-1" viewBox="0 0 16 16">
+                                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+                                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z" />
+                                                    </svg>
+                                                    View
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
                 <div class="card border-0 shadow-sm">
                     <div class="card-body text-center py-5">
-                        <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
-                        <h5 class="mt-3 text-muted">No Active Applications Available</h5>
-                        <p class="text-muted">Check back later for new application opportunities.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
-    else
-    {
-        <div class="row g-4">
-            @foreach (var form in Model.ActiveForms.Where(f => f.Status == "Active"))
-            {
-                var hasApplied = Model.SubmittedFormIds?.Contains(form.FormId) ?? false;
-                var submissionId = hasApplied ? Model.Submissions?.FirstOrDefault(s => s.FormId == form.FormId)?.SubmissionId : null;
-                var daysRemaining = (form.EndDate - DateTime.Now).Days;
-
-                <div class="col-lg-6 col-xl-4">
-                    <div class="card h-100 border-0 shadow-sm @(hasApplied ? "border-success" : "") position-relative" style="@(hasApplied ? "border-width: 2px !important;" : "")">
-
-                        @* Status Badge *@
-                        @if (hasApplied)
-                        {
-                            <div class="position-absolute top-0 end-0 m-3">
-                                <span class="badge bg-success rounded-pill px-3 py-2">
-                                    <i class="bi bi-check-circle-fill"></i> Applied
-                                </span>
-                            </div>
-                        }
-                        else if (daysRemaining <= 3)
-                        {
-                            <div class="position-absolute top-0 end-0 m-3">
-                                <span class="badge bg-danger rounded-pill px-3 py-2">
-                                    <i class="bi bi-exclamation-triangle-fill"></i> Closing Soon
-                                </span>
-                            </div>
-                        }
-                        else if (daysRemaining <= 7)
-                        {
-                            <div class="position-absolute top-0 end-0 m-3">
-                                <span class="badge bg-warning rounded-pill px-3 py-2">
-                                    <i class="bi bi-clock-fill"></i> @daysRemaining days left
-                                </span>
-                            </div>
-                        }
-
-                        <div class="card-body d-flex flex-column">
-                            <div class="mb-3">
-                                <h5 class="card-title fw-bold mb-2">@form.Name</h5>
-                                <p class="card-text text-muted small" style="min-height: 60px;">
-                                    @if (!string.IsNullOrEmpty(form.Description))
-                                    {
-                                        @(form.Description.Length > 150
-                                                                    ? form.Description.Substring(0, 150) + "..."
-                                                                    : form.Description)
-                                                        }
-                                    else
-                                    {
-                                        <span class="fst-italic">No description available</span>
-                                    }
-                                </p>
-                            </div>
-
-                            <div class="mb-3">
-                                <div class="d-flex align-items-center text-muted small mb-2">
-                                    <i class="bi bi-calendar3 me-2"></i>
-                                    <span>
-                                        <strong>Opens:</strong> @form.StartDate.ToString("MMM dd, yyyy")
-                                    </span>
-                                </div>
-                                <div class="d-flex align-items-center text-muted small">
-                                    <i class="bi bi-calendar-x me-2"></i>
-                                    <span>
-                                        <strong>Closes:</strong> @form.EndDate.ToString("MMM dd, yyyy")
-                                    </span>
-                                </div>
-                            </div>
-
-                            @* Progress Bar for Deadline *@
-                            @{
-                                var totalDays = (form.EndDate - form.StartDate).Days;
-                                var daysPassed = (DateTime.Now - form.StartDate).Days;
-                                var progressPercentage = totalDays > 0 ? Math.Min((daysPassed * 100.0 / totalDays), 100) : 0;
-                                var progressColor = progressPercentage > 80 ? "danger" : (progressPercentage > 50 ? "warning" : "primary");
-                            }
-
-                            <div class="mb-3">
-                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <small class="text-muted">Time remaining</small>
-                                    <small class="text-muted">@daysRemaining days</small>
-                                </div>
-                                <div class="progress" style="height: 6px;">
-                                    <div class="progress-bar bg-@progressColor" role="progressbar"
-                                         style="width: @progressPercentage%"
-                                         aria-valuenow="@progressPercentage" aria-valuemin="0" aria-valuemax="100">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-auto">
-                                @if (hasApplied)
-                                {
-                                    <div class="d-grid gap-2">
-                                        <a href="@Url.Action("ViewSubmission", "FormSubmission", new { submissionId = submissionId })"
-                                           class="btn btn-outline-success">
-                                            <i class="bi bi-eye"></i> View Application
-                                        </a>
-                                        <button class="btn btn-secondary" disabled>
-                                            <i class="bi bi-check-circle-fill"></i> Already Applied
-                                        </button>
-                                    </div>
-                                }
-                                else
-                                {
-                                    <div class="d-grid">
-                                        <a href="@Url.Action("ApplyForm", "FormSubmission", new { formId = form.FormId })"
-                                           class="btn btn-primary">
-                                            <i class="bi bi-pencil-square"></i> Apply Now
-                                        </a>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-
-                        @* Visual indicator at bottom for applied forms *@
-                        @if (hasApplied)
-                        {
-                            <div class="card-footer bg-success bg-opacity-10 border-0 text-center py-2">
-                                <small class="text-success fw-bold">
-                                    <i class="bi bi-check2-all"></i> Application Submitted Successfully
-                                </small>
-                            </div>
-                        }
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-inbox text-muted mb-3" viewBox="0 0 16 16">
+                            <path d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm9.954 5H10.45a2.5 2.5 0 0 1-4.9 0H1.066l.32 2.562a.5.5 0 0 0 .497.438h12.234a.5.5 0 0 0 .496-.438L14.933 9zM3.809 3.563A1.5 1.5 0 0 1 4.981 3h6.038a1.5 1.5 0 0 1 1.172.563l3.7 4.625a.5.5 0 0 1 .105.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
+                        </svg>
+                        <h5 class="text-muted mb-2">No applications yet</h5>
+                        <p class="text-muted">No one has submitted an application for this form yet.</p>
                     </div>
                 </div>
             }
         </div>
-    }
+    </div>
 </div>
-
-<style>
-    .bg-gradient {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    }
-
-    .card {
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
-        }
-
-    .progress {
-        border-radius: 10px;
-        background-color: #e9ecef;
-    }
-
-    .progress-bar {
-        border-radius: 10px;
-    }
-</style>

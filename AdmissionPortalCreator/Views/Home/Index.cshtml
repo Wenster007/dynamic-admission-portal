@@ -1,126 +1,262 @@
 ﻿@model AdmissionPortalCreator.ViewModel.DashboardViewModel
 
-<div class="container-fluid">
-    <div class="row">
+<div class="container-fluid p-0">
+    <div class="row g-0">
         <!-- Sidebar -->
-        <div class="col-md-3 col-lg-2 bg-light border-end vh-100 p-3">
-            <h4 class="mb-4">Portal</h4>
-            <ul class="nav flex-column nav-pills">
-                <li class="nav-item">
-                    <a class="nav-link active" id="openAdmissions-tab" data-bs-toggle="pill" href="#openAdmissions">Open Admissions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="users-tab" data-bs-toggle="pill" href="#users">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="settings-tab" data-bs-toggle="pill" href="#settings">Settings</a>
-                </li>
-            </ul>
+        <div class="col-md-3 col-lg-2 bg-dark text-white min-vh-100 shadow-sm">
+            <div class="p-4">
+                <h5 class="fw-bold mb-4 text-light">Dashboard</h5>
+
+                <ul class="nav flex-column sidebar-nav">
+
+                    <li class="nav-item mb-2">
+                        <a class="nav-link active rounded px-3 py-2" id="openAdmissions-tab" data-bs-toggle="pill" href="#openAdmissions">
+                            <i class="bi bi-file-earmark-text me-2"></i>
+                            Admissions
+                        </a>
+                    </li>
+
+                    <li class="nav-item mb-2">
+                        <a class="nav-link rounded px-3 py-2" id="users-tab" data-bs-toggle="pill" href="#users">
+                            <i class="bi bi-people me-2"></i>
+                            Users
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link rounded px-3 py-2" id="settings-tab" data-bs-toggle="pill" href="#settings">
+                            <i class="bi bi-gear me-2"></i>
+                            Settings
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
         </div>
 
+
         <!-- Main Content -->
-        <div class="col-md-9 col-lg-10 p-4">
-            <div class="tab-content">
+        <div class="col-md-9 col-lg-10 bg-light">
+            <div class="p-4">
+                <div class="tab-content">
 
-                <!-- 🔹 Open Admissions -->
-                <div class="tab-pane fade show active" id="openAdmissions">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h3>Open Admissions</h3>
-                        <a asp-controller="Form" asp-action="CreateEdit" class="btn btn-primary">+ Add New</a>
-                    </div>
-
-                    @if (Model.Forms != null && Model.Forms.Any())
-                    {
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Form Name</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Status</th>
-                                    <th>Link</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var form in Model.Forms)
-                                {
-                                    var currentDate = DateTime.Now;
-                                    var isActive = form.StartDate <= currentDate && form.EndDate >= currentDate;
-                                    var isPast = form.EndDate < currentDate;
-                                    var statusClass = isActive && form.Status == "Active" ? "text-success" : (isPast ? "text-danger" : "text-warning");
-                                    var statusText = form.Status;
-
-                                    <tr>
-                                        <td>@form.Name</td>
-                                        <td>@form.StartDate.ToString("dd MMM yyyy")</td>
-                                        <td>@form.EndDate.ToString("dd MMM yyyy")</td>
-                                        <td>
-                                            <span class="@statusClass fw-bold">@statusText</span>
-                                        </td>
-                                        <td>@form.ApplicationWebsite</td>
-                                        <td>
-                                            <a asp-controller="Form" asp-action="CreateEdit" asp-route-id="@form.FormId" class="btn btn-sm btn-warning">Edit</a>
-                                            <a asp-controller="Applicants" asp-action="Index" asp-route-formId="@form.FormId" class="btn btn-sm btn-info">View Applicants</a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    }
-                    else
-                    {
-                        <div class="alert alert-info">
-                            No admission forms found. Click "+ Add New" to create your first form.
+                    <!-- 🔹 Open Admissions -->
+                    <div class="tab-pane fade show active" id="openAdmissions">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h3 class="mb-1 text-dark fw-bold">Open Admissions</h3>
+                                <p class="text-muted mb-0 small">Manage your admission forms and applications</p>
+                            </div>
+                            <a asp-controller="Form" asp-action="CreateEdit" class="btn btn-dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg me-1" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                </svg>
+                                Add New
+                            </a>
                         </div>
-                    }
-                </div>
 
-                <!-- 🔹 Users -->
-                <div class="tab-pane fade" id="users">
-                    <div class="d-flex justify-content-between mb-3">
-                        <h3>Users</h3>
-                        <a asp-controller="Users" asp-action="Create" class="btn btn-success">+ Add User</a>
+                        @if (Model.Forms != null && Model.Forms.Any())
+                        {
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover mb-0">
+                                            <thead class="bg-white border-bottom">
+                                                <tr>
+                                                    <th class="px-4 py-3 text-muted fw-semibold">Form Name</th>
+                                                    <th class="px-4 py-3 text-muted fw-semibold">Start Date</th>
+                                                    <th class="px-4 py-3 text-muted fw-semibold">End Date</th>
+                                                    <th class="px-4 py-3 text-muted fw-semibold">Status</th>
+                                                    <th class="px-4 py-3 text-muted fw-semibold">Link</th>
+                                                    <th class="px-4 py-3 text-muted fw-semibold text-end">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white">
+                                                @foreach (var form in Model.Forms)
+                                                {
+                                                    var currentDate = DateTime.Now;
+                                                    var isActive = form.StartDate <= currentDate && form.EndDate >= currentDate;
+                                                    var isPast = form.EndDate < currentDate;
+                                                    var statusClass = isActive && form.Status == "Active" ? "text-success" : (isPast ? "text-danger" : "text-warning");
+                                                    var badgeClass = isActive && form.Status == "Active" ? "bg-success-subtle text-success" : (isPast ? "bg-danger-subtle text-danger" : "bg-warning-subtle text-warning");
+                                                    var statusText = form.Status;
+
+                                                    <tr>
+                                                        <td class="px-4 py-3 fw-semibold">@form.Name</td>
+                                                        <td class="px-4 py-3 text-muted">@form.StartDate.ToString("dd MMM yyyy")</td>
+                                                        <td class="px-4 py-3 text-muted">@form.EndDate.ToString("dd MMM yyyy")</td>
+                                                        <td class="px-4 py-3">
+                                                            <span class="badge @badgeClass rounded-pill px-3 py-2">@statusText</span>
+                                                        </td>
+                                                        <td class="px-4 py-3">
+                                                            <a href="@form.ApplicationWebsite" target="_blank" class="text-decoration-none text-muted small">
+                                                                @(form.ApplicationWebsite?.Length > 30 ? form.ApplicationWebsite.Substring(0, 30) + "..." : form.ApplicationWebsite)
+                                                            </a>
+                                                        </td>
+                                                        <td class="px-4 py-3 text-end">
+                                                            <a asp-controller="Form" asp-action="CreateEdit" asp-route-id="@form.FormId" class="btn btn-sm btn-outline-secondary me-2">Edit</a>
+                                                            <a asp-controller="Applicants" asp-action="Index" asp-route-formId="@form.FormId" class="btn btn-sm btn-dark">View Applicants</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body text-center py-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-inbox text-muted mb-3" viewBox="0 0 16 16">
+                                        <path d="M4.98 4a.5.5 0 0 0-.39.188L1.54 8H6a.5.5 0 0 1 .5.5 1.5 1.5 0 1 0 3 0A.5.5 0 0 1 10 8h4.46l-3.05-3.812A.5.5 0 0 0 11.02 4H4.98zm9.954 5H10.45a2.5 2.5 0 0 1-4.9 0H1.066l.32 2.562a.5.5 0 0 0 .497.438h12.234a.5.5 0 0 0 .496-.438L14.933 9zM3.809 3.563A1.5 1.5 0 0 1 4.981 3h6.038a1.5 1.5 0 0 1 1.172.563l3.7 4.625a.5.5 0 0 1 .105.374l-.39 3.124A1.5 1.5 0 0 1 14.117 13H1.883a1.5 1.5 0 0 1-1.489-1.314l-.39-3.124a.5.5 0 0 1 .106-.374l3.7-4.625z" />
+                                    </svg>
+                                    <h5 class="text-muted mb-2">No admission forms yet</h5>
+                                    <p class="text-muted mb-3">Get started by creating your first admission form</p>
+                                    <a asp-controller="Form" asp-action="CreateEdit" class="btn btn-dark">Create First Form</a>
+                                </div>
+                            </div>
+                        }
                     </div>
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var u in Model.Users)
-                            {
-                                <tr>
-                                    <td>@u.Email</td>
-                                    <td>@u.Role</td>
-                                    <td>
-                                        @if (User.IsInRole("Admin"))
-                                        {
-                                            <a asp-controller="Users" asp-action="Edit" asp-route-id="@u.Id" asp-route-mode="EditPassword" class="btn btn-warning">Change Password</a>
-                                            <a asp-controller="Users" asp-action="Delete" asp-route-id="@u.Id" asp-route-mode="Delete" class="btn btn-danger">Delete</a>
-                                        }
-                                        else if (User.Identity.Name == u.Email)
-                                        {
-                                            <a asp-controller="Users" asp-action="Edit" asp-route-id="@u.Id" asp-route-mode="EditPassword" class="btn btn-warning">Change Password</a>
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                    <!-- 🔹 Users -->
+                    <div class="tab-pane fade" id="users">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h3 class="mb-1 text-dark fw-bold">Users</h3>
+                                <p class="text-muted mb-0 small">Manage administrative users</p>
+                            </div>
+                            <a asp-controller="Users" asp-action="Create" class="btn btn-dark">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus me-1" viewBox="0 0 16 16">
+                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                </svg>
+                                Add User
+                            </a>
+                        </div>
 
-                <!-- 🔹 Settings -->
-                <div class="tab-pane fade" id="settings">
-                    <h3>Settings</h3>
-                    <p>General configuration will go here...</p>
-                </div>
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-hover mb-0">
+                                        <thead class="bg-white border-bottom">
+                                            <tr>
+                                                <th class="px-4 py-3 text-muted fw-semibold">Email</th>
+                                                <th class="px-4 py-3 text-muted fw-semibold">Role</th>
+                                                <th class="px-4 py-3 text-muted fw-semibold text-end">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white">
+                                            @foreach (var u in Model.Users)
+                                            {
+                                                <tr>
+                                                    <td class="px-4 py-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px; font-size: 14px;">
+                                                                @u.Email?.Substring(0, 1).ToUpper()
+                                                            </div>
+                                                            <span class="fw-semibold">@u.Email</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-4 py-3">
+                                                        <span class="badge bg-light text-dark border px-3 py-2">@u.Role</span>
+                                                    </td>
+                                                    <td class="px-4 py-3 text-end">
+                                                        @if (User.IsInRole("Admin"))
+                                                        {
+                                                            <a asp-controller="Users" asp-action="Edit" asp-route-id="@u.Id" asp-route-mode="EditPassword" class="btn btn-sm btn-outline-secondary me-2">Change Password</a>
+                                                            <a asp-controller="Users" asp-action="Delete" asp-route-id="@u.Id" asp-route-mode="Delete" class="btn btn-sm btn-outline-danger">Delete</a>
+                                                        }
+                                                        else if (User.Identity.Name == u.Email)
+                                                        {
+                                                            <a asp-controller="Users" asp-action="Edit" asp-route-id="@u.Id" asp-route-mode="EditPassword" class="btn btn-sm btn-outline-secondary">Change Password</a>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <!-- 🔹 Settings -->
+                    <div class="tab-pane fade" id="settings">
+                        <div class="mb-4">
+                            <h3 class="mb-1 text-dark fw-bold">Settings</h3>
+                            <p class="text-muted mb-0 small">Configure your portal preferences</p>
+                        </div>
+
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center py-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-gear text-muted mb-3" viewBox="0 0 16 16">
+                                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z" />
+                                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z" />
+                                </svg>
+                                <h5 class="text-muted mb-2">Settings Coming Soon</h5>
+                                <p class="text-muted">General configuration options will be available here</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    /* Custom styling for nav pills */
+    .nav-pills .nav-link {
+        color: #6c757d;
+        transition: all 0.2s ease;
+        font-weight: 500;
+    }
+
+    /* Sidebar styling */
+    .sidebar-nav .nav-link {
+        color: #adb5bd;
+        transition: all 0.3s ease;
+    }
+
+        /* Hover effect */
+        .sidebar-nav .nav-link:hover {
+            background-color: #212529;
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        /* Active tab */
+        .sidebar-nav .nav-link.active {
+            background-color: #0d6efd; /* Bootstrap primary blue */
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+
+    .nav-pills .nav-link:hover {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .nav-pills .nav-link.active {
+        background-color: #212529;
+        color: white;
+    }
+
+    /* Table hover effect */
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    /* Card shadow on hover */
+    .card {
+        transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+        box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08) !important;
+    }
+</style>

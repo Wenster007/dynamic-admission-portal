@@ -23,38 +23,46 @@ namespace AdmissionPortalCreator.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> Index()
         {
-            //fetched currently signed in user details
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            // Fetch currently signed-in user
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
             {
                 return RedirectToAction("Login", "Account");
             }
 
             // Tenant info
             var tenant = await _context.Tenants
-                .FirstOrDefaultAsync(t => t.TenantId == user.TenantId);
+                .FirstOrDefaultAsync(t => t.TenantId == currentUser.TenantId);
 
             // Get all forms for this tenant
             var forms = await _context.Forms
-                .Where(f => f.TenantId == user.TenantId)
+                .Where(f => f.TenantId == currentUser.TenantId)
                 .OrderByDescending(f => f.CreatedAt)
                 .ToListAsync();
 
-            // Users with roles (Admin can see all, Manager maybe restricted)
-            var users = await _userManager.Users
-                .Where(u => u.TenantId == user.TenantId)
+            // Get users in tenant
+            var usersInTenant = await _userManager.Users
+                .Where(u => u.TenantId == currentUser.TenantId)
                 .ToListAsync();
 
             var userViewModels = new List<UserViewModel>();
-            foreach (var u in users)
+
+            foreach (var user in usersInTenant)
             {
-                var roles = await _userManager.GetRolesAsync(u);
-                userViewModels.Add(new UserViewModel
+                var roles = await _userManager.GetRolesAsync(user);
+                var role = roles.FirstOrDefault();
+
+                // Only add administrative users (exclude Student role)
+                if (role != null && role != "Student")
                 {
-                    Id = u.Id,
-                    Email = u.Email,
-                    Role = roles.FirstOrDefault() ?? "User"
-                });
+                    userViewModels.Add(new UserViewModel
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        FullName = user.FullName,
+                        Role = role
+                    });
+                }
             }
 
             // Build Dashboard model
@@ -67,5 +75,6 @@ namespace AdmissionPortalCreator.Controllers
 
             return View(dashboard);
         }
+
     }
 }
