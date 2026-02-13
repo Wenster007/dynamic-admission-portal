@@ -43,6 +43,24 @@ namespace AdmissionPortalCreator.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            // ✅ Check if user exists first
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "No account found with this email.");
+                return View(model);
+            }
+
+            // ✅ Check if user is a Student
+            var isStudent = await _userManager.IsInRoleAsync(user, "Student");
+            if (isStudent)
+            {
+                ModelState.AddModelError("", "Student accounts cannot login here. Please use the student portal.");
+                return View(model);
+            }
+
+            // Proceed with normal login for Admin/Manager
             var result = await _signInManager.PasswordSignInAsync(
                 model.Email, model.Password, isPersistent: false, lockoutOnFailure: false);
 
@@ -51,11 +69,11 @@ namespace AdmissionPortalCreator.Controllers
                 return RedirectToAction("Index", "Home"); // redirect after login
             }
 
-            ModelState.AddModelError("", "Invalid login attempt.");
+            ModelState.AddModelError("", "Invalid login credentials.");
             return View(model);
         }
 
-         //🔹 GET: Register Page
+        //🔹 GET: Register Page
         [HttpGet]
         public IActionResult Register()
         {
@@ -68,6 +86,23 @@ namespace AdmissionPortalCreator.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
+
+            // ✅ Check if email already exists
+            var existingUser = await _userManager.FindByEmailAsync(model.Email);
+            if (existingUser != null)
+            {
+                // Check if it's a student account
+                var isStudent = await _userManager.IsInRoleAsync(existingUser, "Student");
+                if (isStudent)
+                {
+                    ModelState.AddModelError("Email", "This email is already registered as a student account. Please use a different email for admin registration.");
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "This email is already registered. Please use a different email or login.");
+                }
+                return View(model);
+            }
 
             // 1. Create Tenant
             var tenant = new Tenant
@@ -131,7 +166,7 @@ namespace AdmissionPortalCreator.Controllers
             if (user != null)
             {
                 isStudent = await _userManager.IsInRoleAsync(user, "Student");
-                isManager = await _userManager.IsInRoleAsync(user, "Manager");  
+                isManager = await _userManager.IsInRoleAsync(user, "Manager");
                 isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
             }
 

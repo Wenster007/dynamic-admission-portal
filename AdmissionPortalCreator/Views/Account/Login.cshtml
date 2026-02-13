@@ -1,30 +1,70 @@
 ﻿@model AdmissionPortalCreator.Models.LoginViewModel
 
-<div class="d-flex justify-content-center align-items-center" style="min-height:70vh;">
-    <div class="card shadow p-4" style="width: 100%; max-width: 400px; border-radius: 12px;">
-        <h4 class="text-center mb-4">Login</h4>
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="col-md-5 col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <h3 class="fw-bold text-dark mb-2">Admin Login</h3>
+                        <p class="text-muted small mb-0">Sign in to access your dashboard</p>
+                    </div>
 
-        <form asp-action="Login" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
+                    <form asp-action="Login" method="post">
 
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger @(ViewData.ModelState.IsValid ? "d-none" : "")"
+                             role="alert">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label text-muted">Email Address</label>
+                            <input asp-for="Email" class="form-control" placeholder="Enter your email" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Password" class="form-label text-muted">Password</label>
+                            <input asp-for="Password" class="form-control" type="password" placeholder="Enter your password" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-box-arrow-in-right me-2" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                                <path fill-rule="evenodd"
+                                      d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                            </svg>
+                            Sign In
+                        </button>
+
+                        <div class="text-center">
+                            <small class="text-muted">
+                                Don't have an account?
+                                <a asp-action="Register"
+                                   asp-controller="Account"
+                                   class="text-decoration-none text-dark fw-semibold">
+                                    Create Organization
+                                </a>
+                            </small>
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
 
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" type="password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-info-circle me-1" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                    </svg>
+                    This is the admin portal. Students should use the application link provided by their institution.
+                </small>
             </div>
-
-            <button type="submit" class="btn btn-primary w-100">Login</button>
-        </form>
-
-        <div class="text-center mt-3">
-            Don’t have an account?
-            <a asp-action="Register" asp-controller="Account">Sign up now</a>
         </div>
     </div>
 </div>
